@@ -15,4 +15,8 @@ class PageNavigation {
       return count++ == times;
     });
   }
+
+  static void replaceAll(BuildContext context, Widget page) =>
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => page), (route) => false);
 }

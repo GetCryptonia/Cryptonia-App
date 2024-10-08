@@ -1,5 +1,5 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/features/auth/screens/onboarding.dart';
-import 'package:cryptonia/src/shared/theming/page_navigation.dart';
 import 'package:cryptonia/src/shared/widgets/container_bg.dart';
 import 'package:flutter/material.dart';
 

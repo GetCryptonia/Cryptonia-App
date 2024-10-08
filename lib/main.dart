@@ -1,21 +1,17 @@
+import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const MyApp(),
-    // MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(create: (_) => AuthProvider()),
-    //     ChangeNotifierProvider(create: (_) => AirtimeProvider()),
-    //     ChangeNotifierProvider(create: (_) => MobileDataProvider()),
-    //     ChangeNotifierProvider(create: (_) => CableTvProvider()),
-    //     ChangeNotifierProvider(create: (_) => TransactionProvider()),
-    //     ChangeNotifierProvider(create: (_) => BankTransferProvider()),
-    //   ],
-    //   child: const MyApp(),
-    // ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 

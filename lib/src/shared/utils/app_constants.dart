@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class AppConstants {
+  static String get baseUrl => 'https://cryptonia-backend.onrender.com/api/v1/';
+
   static EdgeInsetsGeometry get kScaffoldPadding => const EdgeInsets.all(16);
+
   static void setTextFieldValue({
     required TextEditingController controller,
     required String text,

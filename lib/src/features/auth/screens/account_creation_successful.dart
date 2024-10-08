@@ -1,6 +1,6 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/features/auth/screens/enable_biometrics.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
-import 'package:cryptonia/src/shared/theming/page_navigation.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/widgets/container_bg.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';

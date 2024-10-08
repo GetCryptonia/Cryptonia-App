@@ -1,5 +1,5 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/features/auth/screens/verify_sign_up_email.dart';
-import 'package:cryptonia/src/shared/theming/page_navigation.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
