@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _referralCodeController = TextEditingController();
-  bool acceptTerms = false;
+  bool acceptTerms = true;
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
@@ -62,19 +62,15 @@ class _SignUpState extends State<SignUp> {
                           const SizedBox(height: 16),
                           CustomRoundedTextField(
                             label: 'Email',
-                            obscureText: true,
-                            visibilityIcons: true,
                             controller: _emailController,
                             hint: 'Enter your email address',
                             keyboardType: TextInputType.emailAddress,
                           ),
                           const SizedBox(height: 16),
                           CustomRoundedTextField(
-                            obscureText: true,
-                            visibilityIcons: true,
                             label: 'Referral Code',
                             controller: _referralCodeController,
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.text,
                             hint: 'Enter your referral code (optional)',
                           ),
                           const SizedBox(height: 16),
@@ -153,7 +149,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   CustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (acceptTerms == false) {
                         UiUtils.showErrorDialog(context,
                             description:
@@ -182,6 +178,12 @@ class _SignUpState extends State<SignUp> {
                             ? null
                             : _referralCodeController.text.trim(),
                       );
+
+                      UiUtils.showLoadingIndicatorDialog(context);
+
+                      authProv.sendOtp(_emailController.text.trim());
+
+                      PageNavigation.popPage(context);
 
                       PageNavigation.pushPage(context, const CreatePassword());
                     },

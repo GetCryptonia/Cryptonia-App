@@ -101,13 +101,13 @@ class _VerifySignUpEmailState extends State<VerifySignUpEmail> {
                       final res = await authProv.verifyEmail(
                           context, _otpController.text);
 
+                      PageNavigation.popPage(context);
+
                       if (res.status == Status.error) {
                         UiUtils.showErrorDialog(context,
                             description: res.message);
                         return;
                       }
-
-                      PageNavigation.popPage(context);
 
                       PageNavigation.pushPage(
                           context, const AccountCreationSuccessful());

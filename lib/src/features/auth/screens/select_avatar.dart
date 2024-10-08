@@ -91,8 +91,6 @@ class _SelectAvatarState extends State<SelectAvatar> {
                     authProv.signupRequestModel?.avatar =
                         'assets/images/avatars/${selected + 1}.png';
 
-                    print(authProv.signupRequestModel?.toJson());
-
                     UiUtils.showLoadingIndicatorDialog(context);
 
                     final res = await authProv.signUp(
@@ -102,6 +100,8 @@ class _SelectAvatarState extends State<SelectAvatar> {
                       avatar: authProv.signupRequestModel!.avatar,
                       referralCode: authProv.signupRequestModel!.referralCode,
                     );
+
+                    await authProv.sendOtp(authProv.signupRequestModel!.email);
 
                     PageNavigation.popPage(context);
 
