@@ -19,7 +19,9 @@ class AuthService {
       final response = await dio.post("$_path$endpoint", data: body);
 
       return ApiResponse.success(
-          json: response.data, data: response.data['data']);
+        message: response.data['message'],
+        data: response.data['data'],
+      );
     } catch (e) {
       if (e is DioException) {
         return ApiResponse.dioException(e);

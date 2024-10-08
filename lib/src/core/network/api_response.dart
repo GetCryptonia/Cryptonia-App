@@ -16,11 +16,11 @@ class ApiResponse<T> {
   });
 
   factory ApiResponse.success({
-    required Map<String, dynamic> json,
+    required String message,
     dynamic data,
   }) {
     return ApiResponse(
-      message: json['message'] ?? 'Success',
+      message: message,
       status: Status.success,
       errorMessage: null,
       data: data,
@@ -70,9 +70,10 @@ class ApiResponse<T> {
     }
   }
 
-  factory ApiResponse.exception(String error) {
+  factory ApiResponse.exception(String error,
+      [String title = 'An error occurred']) {
     return ApiResponse(
-      message: 'An error occurred',
+      message: title,
       errorMessage: error,
       status: Status.error,
     );

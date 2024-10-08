@@ -4,6 +4,7 @@ import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
 import 'package:cryptonia/src/features/auth/screens/enable_biometrics.dart';
 import 'package:cryptonia/src/features/auth/screens/enter_email.dart';
 import 'package:cryptonia/src/features/auth/screens/sign_up.dart';
+import 'package:cryptonia/src/features/home/screens/home_screen.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
@@ -95,6 +96,9 @@ class _SignInState extends State<SignIn> {
                                   email: _emailController.text,
                                   password: _passwordController.text);
 
+                              final biometricRes =
+                                  await authProv.canUseBiometrics();
+
                               PageNavigation.popPage(context);
 
                               if (res.status == Status.error) {
@@ -110,7 +114,11 @@ class _SignInState extends State<SignIn> {
                               //If so, navigate to home screen
                               //else navigate user to enable biometrics screen
                               PageNavigation.pushPage(
-                                  context, const EnableBiometrics());
+                                context,
+                                biometricRes
+                                    ? const EnableBiometrics()
+                                    : const HomeScreen(),
+                              );
                             },
                             text: 'Sign In',
                           ),
@@ -118,8 +126,71 @@ class _SignInState extends State<SignIn> {
                           Align(
                             alignment: Alignment.center,
                             child: InkWell(
-                              onTap: () => PageNavigation.pushPage(
-                                  context, const EnableBiometrics()),
+                              onTap: () async {
+                                //check if user can use biometrics
+                                final biometricRes =
+                                    await authProv.canUseBiometrics();
+
+                                if (!biometricRes) {
+                                  UiUtils.showErrorDialog(
+                                    context,
+                                    title: 'Biometrics Error',
+                                    description:
+                                        'Biometrics is not available on this device',
+                                  );
+                                  return;
+                                }
+
+                                //check for stored auth details
+                                await authProv.fetchLoginDetails();
+
+                                //if stored details is null return error
+                                if (authProv.loginDetails == null) {
+                                  UiUtils.showErrorDialog(
+                                    context,
+                                    title: 'Biometrics Error',
+                                    description:
+                                        'No stored login details found',
+                                  );
+                                  return;
+                                }
+
+                                //else authenticate with biometrics
+                                final res =
+                                    await authProv.authenticateWithBiometrics();
+
+                                if (res.status == Status.error) {
+                                  UiUtils.showErrorDialog(
+                                    context,
+                                    title: 'Biometrics Error',
+                                    description: res.message,
+                                  );
+                                  return;
+                                }
+
+                                UiUtils.showLoadingIndicatorDialog(context);
+
+                                //sign in user
+                                final loginRes = await authProv.login(
+                                  email: authProv.loginDetails!.email,
+                                  password: authProv.loginDetails!.password,
+                                );
+
+                                PageNavigation.popPage(context);
+
+                                if (loginRes.status == Status.error) {
+                                  UiUtils.showErrorDialog(
+                                    context,
+                                    title: loginRes.message,
+                                    description: loginRes.errorMessage ?? '',
+                                  );
+                                  return;
+                                }
+
+                                //navigate to home screen
+                                PageNavigation.pushPage(
+                                    context, const HomeScreen());
+                              },
                               child: Container(
                                 width: 48,
                                 height: 48,

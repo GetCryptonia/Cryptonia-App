@@ -6,15 +6,15 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService {
-  Future<bool> storeToken(String token) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.setString('Token', token);
-  }
-
-  Future<String?> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('Token');
-  }
+  // Future<bool> storeToken(String token) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   return await prefs.setString('Token', token);
+  // }
+  //
+  // Future<String?> getToken() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   return prefs.getString('Token');
+  // }
 
   Future<bool> storeLoginDetails(LoginDetailsModel loginDetails) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
