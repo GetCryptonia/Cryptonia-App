@@ -1,9 +1,13 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/core/local/storage_service.dart';
 import 'package:cryptonia/src/core/network/api_response.dart';
 import 'package:cryptonia/src/features/auth/models/login_details_model.dart';
+import 'package:cryptonia/src/features/auth/models/signup_request_model.dart';
+import 'package:cryptonia/src/features/auth/screens/sign_in.dart';
 import 'package:cryptonia/src/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 
@@ -11,8 +15,42 @@ class AuthProvider with ChangeNotifier {
   final StorageService _storageService = StorageService();
   final AuthService _authService = AuthService();
 
-  LoginDetailsModel? _loginDetails;
+  String? token;
+  String? getToken(BuildContext context) {
+    if (token == null || JwtDecoder.isExpired(token!)) {
+      PageNavigation.replaceAll(context, const SignIn());
+      return null;
+    }
+    return token;
+  }
 
+  set authToken(String? value) {
+    token = value;
+    notifyListeners();
+  }
+
+  String? _forgotPasswordEmail;
+  String? get forgotPasswordEmail => _forgotPasswordEmail;
+  set forgotPasswordEmail(String? value) {
+    _forgotPasswordEmail = value;
+    notifyListeners();
+  }
+
+  String? _forgotPasswordOtp;
+  String? get forgotPasswordOtp => _forgotPasswordOtp;
+  set forgotPasswordOtp(String? value) {
+    _forgotPasswordOtp = value;
+    notifyListeners();
+  }
+
+  SignupRequestModel? _signupRequestModel;
+  SignupRequestModel? get signupRequestModel => _signupRequestModel;
+  set signupRequestModel(SignupRequestModel? value) {
+    _signupRequestModel = value;
+    notifyListeners();
+  }
+
+  LoginDetailsModel? _loginDetails;
   LoginDetailsModel? get loginDetails => _loginDetails;
   set loginDetails(LoginDetailsModel? value) {
     _loginDetails = value;
@@ -84,6 +122,78 @@ class AuthProvider with ChangeNotifier {
     if (res.status != Status.success) return res;
 
     loginDetails = LoginDetailsModel(email: email, password: password);
+    token = res.data;
+
+    return res;
+  }
+
+  Future<ApiResponse> sendOtp(String email) async {
+    if (email.isEmpty) return ApiResponse.exception("Email is required");
+
+    final res = await _authService.sendOtp(email);
+
+    if (res.status == Status.success) {
+      forgotPasswordEmail = email;
+      notifyListeners();
+    }
+
+    return res;
+  }
+
+  Future<ApiResponse> changePassword(String password) async {
+    if (password.isEmpty) return ApiResponse.exception("Password is required");
+
+    final res = await _authService.changePassword(
+        email: forgotPasswordEmail!,
+        password: password,
+        otp: forgotPasswordOtp!);
+
+    return res;
+  }
+
+  Future<ApiResponse> signUp({
+    required String email,
+    required String username,
+    required String password,
+    required String avatar,
+    required String? referralCode,
+  }) async {
+    if (email.isEmpty) return ApiResponse.exception("Email is required");
+
+    if (username.isEmpty) return ApiResponse.exception("Username is required");
+
+    if (password.isEmpty) return ApiResponse.exception("Password is required");
+
+    if (avatar.isEmpty) return ApiResponse.exception("Avatar is required");
+
+    final res = await _authService.signUp(
+      email: email,
+      username: username,
+      password: password,
+      avatar: avatar,
+      referralCode: referralCode,
+    );
+
+    if (res.status == Status.success) {
+      loginDetails = LoginDetailsModel(email: email, password: password);
+      token = res.data;
+    }
+
+    return res;
+  }
+
+  Future<ApiResponse> verifyEmail(BuildContext context, String otp) async {
+    if (otp.length < 6) return ApiResponse.exception("Enter a valid otp");
+
+    String? token = getToken(context);
+
+    if (token == null) return ApiResponse.exception("Token is required");
+
+    final res = await _authService.verifyEmail(otp: otp, token: token);
+
+    if (res.status != Status.success) return res;
+
+    token = res.data;
 
     return res;
   }

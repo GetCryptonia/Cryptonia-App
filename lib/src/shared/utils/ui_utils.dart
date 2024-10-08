@@ -33,4 +33,17 @@ class UiUtils {
       },
     );
   }
+
+  static showSnackBar(BuildContext context, String text) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: AppColors.kPrimary,
+        content: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+      ),
+    );
+  }
 }

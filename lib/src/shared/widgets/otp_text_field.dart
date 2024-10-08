@@ -5,8 +5,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class CustomOtpTextField extends StatelessWidget {
   final int length;
+  final Function(String)? onChanged;
   final TextEditingController? controller;
-  const CustomOtpTextField({super.key, this.controller, this.length = 6});
+  const CustomOtpTextField(
+      {super.key, this.controller, this.length = 6, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class CustomOtpTextField extends StatelessWidget {
           animationDuration: const Duration(milliseconds: 300),
           enableActiveFill: true,
           onCompleted: (v) {},
-          onChanged: (value) {},
+          onChanged: onChanged,
           beforeTextPaste: (text) {
             // print("Allowing to paste $text");
             //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
