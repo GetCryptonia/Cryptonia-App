@@ -3,63 +3,85 @@ import 'package:flutter/material.dart';
 
 class AppTheming {
   static ThemeData get darkThemeData => ThemeData.dark().copyWith(
-      primaryColor: AppColors.kPrimary,
-      scaffoldBackgroundColor: AppColors.kScaffold,
-      iconTheme: const IconThemeData(color: Colors.white, size: 25),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.kScaffold,
-        elevation: 0,
-        iconTheme: IconThemeData(color: AppColors.kTextField),
-        titleTextStyle: TextStylesTheme.bodyMedium,
-        centerTitle: true,
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor:
-              const WidgetStatePropertyAll<Color>(AppColors.kPrimary),
-          padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
-              EdgeInsets.symmetric(horizontal: 37.5, vertical: 18.5)),
-          textStyle: WidgetStatePropertyAll<TextStyle>(
-            TextStylesTheme.textButton.copyWith(color: AppColors.kTextColor),
-          ),
-          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+        primaryColor: AppColors.kPrimary,
+        scaffoldBackgroundColor: AppColors.kScaffold,
+        iconTheme: const IconThemeData(color: Colors.white, size: 25),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.kScaffold,
+          elevation: 0,
+          iconTheme: IconThemeData(color: AppColors.kTextField),
+          titleTextStyle: TextStylesTheme.bodyMedium,
+          centerTitle: true,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor:
+                const WidgetStatePropertyAll<Color>(AppColors.kPrimary),
+            padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
+                EdgeInsets.symmetric(horizontal: 37.5, vertical: 18.5)),
+            textStyle: WidgetStatePropertyAll<TextStyle>(
+              TextStylesTheme.textButton.copyWith(color: AppColors.kTextColor),
+            ),
+            shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
-              EdgeInsets.all(0)),
-          textStyle: WidgetStatePropertyAll<TextStyle>(
-            TextStylesTheme.textButton.copyWith(color: AppColors.kPrimary),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
+                EdgeInsets.all(0)),
+            textStyle: WidgetStatePropertyAll<TextStyle>(
+              TextStylesTheme.textButton.copyWith(color: AppColors.kPrimary),
+            ),
           ),
         ),
-      ),
-      colorScheme: const ColorScheme.dark(primary: AppColors.kPrimary),
-      textTheme: const TextTheme(
-        headlineMedium: TextStylesTheme.headingMedium,
-        headlineSmall: TextStylesTheme.headingSmall,
-        bodyMedium: TextStylesTheme.bodyMedium,
-        bodySmall: TextStylesTheme.bodySmall,
-        labelLarge: TextStylesTheme.elevatedButton,
-        labelMedium: TextStylesTheme.textField,
-        labelSmall: TextStylesTheme.label,
-      )
-      //     .apply(
-      //   decorationColor: Colors.black,
-      //   displayColor: Colors.black,
-      //   bodyColor: Colors.black,
-      // ),
+        colorScheme: const ColorScheme.dark(primary: AppColors.kPrimary),
+        textTheme: const TextTheme(
+          headlineMedium: TextStylesTheme.headingMedium,
+          headlineSmall: TextStylesTheme.headingSmall,
+          bodyMedium: TextStylesTheme.bodyMedium,
+          bodySmall: TextStylesTheme.bodySmall,
+          labelLarge: TextStylesTheme.elevatedButton,
+          labelMedium: TextStylesTheme.textField,
+          labelSmall: TextStylesTheme.label,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.kContainerBg,
+          selectedItemColor: AppColors.kPrimary,
+          unselectedItemColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+        ),
+        dividerTheme: const DividerThemeData(
+          color: AppColors.kTextField,
+        ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: AppColors.kContainerBg,
+        ),
+        //     .apply(
+        //   decorationColor: Colors.black,
+        //   displayColor: Colors.black,
+        //   bodyColor: Colors.black,
+        // ),
       );
 }
 
 class AppColors {
   static const kPrimary = Color(0xffBB9534); //#BB9534
 
+  static const kNavBarSelected = Color(0xff4F3F16); //#4F3F16
+
+  static const kPrimaryGradient1 = Color(0xffAA882F); //#AA882F
+
+  static const kPrimaryGradient2 = Color(0xff755E23); //#755E23
+
   static const kHintText = Color(0xff717171); //#717171
+
+  static const kContainerBg = Color(0xff181818); //#181818
 
   static const kScaffold = Color(0xff0C0C0C); //#0C0C0C
 
@@ -70,4 +92,6 @@ class AppColors {
   static const kRedCross = Color(0xffD42620); //#D42620
 
   static const kTextColor = Color(0xffFFFFFF); //#FFFFFF
+
+  static const kFadedText = Color(0xffCECECE); //#CECECE
 }

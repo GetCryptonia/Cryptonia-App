@@ -72,9 +72,13 @@ flutter:
   assets:
      - assets/svgs/onboarding/
      - assets/svgs/auth/
+     - assets/svgs/home/
+     - assets/svgs/home/filled/
+     - assets/svgs/home/outlined/
 
      - assets/images/onboarding/
      - assets/images/avatars/
+     - assets/images/home/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
