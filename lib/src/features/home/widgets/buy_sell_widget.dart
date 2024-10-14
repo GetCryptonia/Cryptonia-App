@@ -1,3 +1,4 @@
+import 'package:cryptonia/src/core/enums/tokens_enum.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class BuySellWidget extends StatefulWidget {
 }
 
 class _BuySellWidgetState extends State<BuySellWidget> {
+  TokenType haveToken = TokenType.btc;
+  TokenType needToken = TokenType.ngn;
   bool buy = true;
   @override
   Widget build(BuildContext context) {
@@ -102,28 +105,57 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                     ),
                   ],
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.kTextField,
-                    borderRadius: BorderRadius.circular(128),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CircleAvatar(
-                        radius: 9,
-                        backgroundColor: AppColors.kScaffold,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'ETH',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.keyboard_arrow_down_rounded, size: 17)
-                    ],
+                PopupMenuButton(
+                  itemBuilder: (context) {
+                    return TokenType.values.map((token) {
+                      return PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            haveToken = token;
+                          });
+                        },
+                        value: token,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 9,
+                              backgroundImage: AssetImage(token.asset),
+                              backgroundColor: AppColors.kScaffold,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              token.label,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList();
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.kTextField,
+                      borderRadius: BorderRadius.circular(128),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 9,
+                          backgroundImage: AssetImage(haveToken.asset),
+                          backgroundColor: AppColors.kScaffold,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          haveToken.label,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.keyboard_arrow_down_rounded, size: 17)
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -157,28 +189,57 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                     ),
                   ],
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.kTextField,
-                    borderRadius: BorderRadius.circular(128),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CircleAvatar(
-                        radius: 9,
-                        backgroundColor: AppColors.kScaffold,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'NGN',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.keyboard_arrow_down_rounded, size: 17)
-                    ],
+                PopupMenuButton(
+                  itemBuilder: (context) {
+                    return TokenType.values.map((token) {
+                      return PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            needToken = token;
+                          });
+                        },
+                        value: token,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 9,
+                              backgroundImage: AssetImage(token.asset),
+                              backgroundColor: AppColors.kScaffold,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              token.label,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList();
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.kTextField,
+                      borderRadius: BorderRadius.circular(128),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 9,
+                          backgroundImage: AssetImage(needToken.asset),
+                          backgroundColor: AppColors.kScaffold,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          needToken.label,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.keyboard_arrow_down_rounded, size: 17)
+                      ],
+                    ),
                   ),
                 ),
               ],

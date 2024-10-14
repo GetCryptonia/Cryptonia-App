@@ -75,7 +75,11 @@ class _EnterNinDetailsState extends State<EnterNinDetails> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const CircleAvatar(radius: 10),
+                              const CircleAvatar(
+                                radius: 10,
+                                backgroundImage: AssetImage(
+                                    'assets/images/nigerian-flag.png'),
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 '+234',
