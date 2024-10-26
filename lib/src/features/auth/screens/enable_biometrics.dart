@@ -1,7 +1,7 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/core/network/api_response.dart';
 import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
-import 'package:cryptonia/src/features/home/screens/home_screen.dart';
+import 'package:cryptonia/src/features/home/screens/nav_home.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
@@ -92,14 +92,14 @@ class _EnableBiometricsState extends State<EnableBiometrics> {
                             return;
                           }
 
-                          PageNavigation.pushPage(context, const HomeScreen());
+                          PageNavigation.pushPage(context, const NavHome());
                         },
                       ),
                       const SizedBox(height: 16),
                       CustomButton(
                         text: 'No Thanks',
-                        onPressed: () => PageNavigation.pushPage(
-                            context, const HomeScreen()),
+                        onPressed: () =>
+                            PageNavigation.pushPage(context, const NavHome()),
                         color: AppColors.kTextField,
                       ),
                     ],

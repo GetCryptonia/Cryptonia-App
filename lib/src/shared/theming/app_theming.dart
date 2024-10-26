@@ -9,7 +9,7 @@ class AppTheming {
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.kScaffold,
           elevation: 0,
-          iconTheme: IconThemeData(color: AppColors.kTextField),
+          iconTheme: IconThemeData(color: AppColors.kTextColor),
           titleTextStyle: TextStylesTheme.bodyMedium,
           centerTitle: true,
         ),
@@ -42,6 +42,7 @@ class AppTheming {
         textTheme: const TextTheme(
           headlineMedium: TextStylesTheme.headingMedium,
           headlineSmall: TextStylesTheme.headingSmall,
+          bodyLarge: TextStylesTheme.bodyLarge,
           bodyMedium: TextStylesTheme.bodyMedium,
           bodySmall: TextStylesTheme.bodySmall,
           labelLarge: TextStylesTheme.elevatedButton,
@@ -94,4 +95,6 @@ class AppColors {
   static const kTextColor = Color(0xffFFFFFF); //#FFFFFF
 
   static const kFadedText = Color(0xffCECECE); //#CECECE
+
+  static const kProfileIcon = Color(0xffBBBBBB); //#BBBBBB
 }

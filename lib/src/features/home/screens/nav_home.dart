@@ -1,5 +1,6 @@
 import 'package:cryptonia/src/features/home/models/nav_item.dart';
 import 'package:cryptonia/src/features/home/screens/home_screen.dart';
+import 'package:cryptonia/src/features/profile/screens/edit_profile/profile_screen.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,25 +19,25 @@ class _NavHomeState extends State<NavHome> {
       label: 'Home',
       activeIcon: 'assets/svgs/home/filled/home.svg',
       passiveIcon: 'assets/svgs/home/outlined/home.svg',
-      page: HomeScreen(),
+      page: const HomeScreen(),
     ),
     NavItem(
       label: 'History',
       activeIcon: 'assets/svgs/home/filled/history.svg',
       passiveIcon: 'assets/svgs/home/outlined/history.svg',
-      page: HomeScreen(),
+      page: const HomeScreen(),
     ),
     NavItem(
       label: 'Referral',
       activeIcon: 'assets/svgs/home/filled/referral.svg',
       passiveIcon: 'assets/svgs/home/outlined/referral.svg',
-      page: HomeScreen(),
+      page: const HomeScreen(),
     ),
     NavItem(
       label: 'More',
       activeIcon: 'assets/svgs/home/filled/more.svg',
       passiveIcon: 'assets/svgs/home/outlined/more.svg',
-      page: HomeScreen(),
+      page: const ProfileScreen(),
     ),
   ];
 

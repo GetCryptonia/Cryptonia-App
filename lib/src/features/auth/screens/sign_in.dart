@@ -4,7 +4,7 @@ import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
 import 'package:cryptonia/src/features/auth/screens/enable_biometrics.dart';
 import 'package:cryptonia/src/features/auth/screens/enter_email.dart';
 import 'package:cryptonia/src/features/auth/screens/sign_up.dart';
-import 'package:cryptonia/src/features/home/screens/home_screen.dart';
+import 'package:cryptonia/src/features/home/screens/nav_home.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
                                 context,
                                 biometricRes
                                     ? const EnableBiometrics()
-                                    : const HomeScreen(),
+                                    : const NavHome(),
                               );
                             },
                             text: 'Sign In',
@@ -189,7 +189,7 @@ class _SignInState extends State<SignIn> {
 
                                 //navigate to home screen
                                 PageNavigation.pushPage(
-                                    context, const HomeScreen());
+                                    context, const NavHome());
                               },
                               child: Container(
                                 width: 48,

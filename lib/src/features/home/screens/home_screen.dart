@@ -1,6 +1,8 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/features/home/widgets/buy_sell_widget.dart';
 import 'package:cryptonia/src/features/home/widgets/kyc_status_card.dart';
 import 'package:cryptonia/src/features/kyc/screens/verification_status.dart';
+import 'package:cryptonia/src/features/notification/screens/notification_list.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,8 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ]),
                   ),
-                  SvgPicture.asset('assets/svgs/home/notification.svg',
-                      width: 20, height: 20),
+                  InkWell(
+                    onTap: () => PageNavigation.pushPage(
+                        context, const NotificationList()),
+                    child: SvgPicture.asset('assets/svgs/home/notification.svg',
+                        width: 20, height: 20),
+                  ),
                 ],
               ),
             ),

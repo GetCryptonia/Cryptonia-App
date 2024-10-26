@@ -45,6 +45,8 @@ dependencies:
   shared_preferences: ^2.3.2
   jwt_decoder: ^2.0.1
   local_auth: ^2.3.0
+  url_launcher: ^6.3.1
+  flutter_email_sender: ^6.0.3
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +77,11 @@ flutter:
      - assets/svgs/home/
      - assets/svgs/home/filled/
      - assets/svgs/home/outlined/
+     - assets/svgs/profile/
+     - assets/svgs/profile/delete.svg/
+     - assets/svgs/notification/
 
+     - assets/images/notification/
      - assets/images/onboarding/
      - assets/images/avatars/
      - assets/images/home/

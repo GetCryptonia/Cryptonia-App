@@ -7,6 +7,9 @@ class TextStylesTheme {
   static const TextStyle headingSmall =
       TextStyle(fontSize: 24, fontWeight: FontWeight.w600, fontFamily: "SfPro");
 
+  static const TextStyle bodyLarge =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.w500, fontFamily: "SfPro");
+
   static const TextStyle bodyMedium =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontFamily: "SfPro");
 
