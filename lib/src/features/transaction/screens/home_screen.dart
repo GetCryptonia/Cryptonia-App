@@ -1,8 +1,9 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
-import 'package:cryptonia/src/features/home/widgets/buy_sell_widget.dart';
-import 'package:cryptonia/src/features/home/widgets/kyc_status_card.dart';
 import 'package:cryptonia/src/features/kyc/screens/verification_status.dart';
 import 'package:cryptonia/src/features/notification/screens/notification_list.dart';
+import 'package:cryptonia/src/features/transaction/screens/select_bank.dart';
+import 'package:cryptonia/src/features/transaction/widgets/buy_sell_widget.dart';
+import 'package:cryptonia/src/features/transaction/widgets/kyc_status_card.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,7 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             'or 150,000 NGN worth of trade.',
                       ),
                       const SizedBox(height: 16),
-                      const BuySellWidget(),
+                      BuySellWidget(
+                        exchange: () {
+                          PageNavigation.pushPage(context, const SelectBank());
+                        },
+                      ),
                       const SizedBox(height: 16),
                       Container(
                         height: 100,

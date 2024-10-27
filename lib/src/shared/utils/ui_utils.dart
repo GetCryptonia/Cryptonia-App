@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class UiUtils {
   static Widget loadingIndicator(BuildContext context,
       {Color color = AppColors.kPrimary, double size = 50.0}) {
-    return SpinKitPouringHourGlassRefined(color: color, size: size);
+    return SpinKitRing(color: color, size: size);
   }
 
   static void showLoadingIndicatorDialog(BuildContext context) {

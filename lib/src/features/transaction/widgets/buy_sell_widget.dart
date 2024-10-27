@@ -1,10 +1,12 @@
 import 'package:cryptonia/src/core/enums/tokens_enum.dart';
+import 'package:cryptonia/src/features/transaction/screens/select_currency_bottom_sheet.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class BuySellWidget extends StatefulWidget {
-  const BuySellWidget({super.key});
+  final VoidCallback exchange;
+  const BuySellWidget({super.key, required this.exchange});
 
   @override
   State<BuySellWidget> createState() => _BuySellWidgetState();
@@ -12,8 +14,6 @@ class BuySellWidget extends StatefulWidget {
 
 class _BuySellWidgetState extends State<BuySellWidget> {
   TokenType haveToken = TokenType.btc;
-  TokenType needToken = TokenType.ngn;
-  bool buy = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,44 +27,13 @@ class _BuySellWidgetState extends State<BuySellWidget> {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.kScaffold,
-                borderRadius: BorderRadius.circular(128),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomButton(
-                    onPressed: () {
-                      setState(() {
-                        buy = true;
-                      });
-                    },
-                    text: 'Buy Crypto',
-                    borderRadius: 128,
-                    textStyle: Theme.of(context).textTheme.bodySmall,
-                    color:
-                        buy == true ? AppColors.kPrimary : AppColors.kScaffold,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 9, horizontal: 16),
-                  ),
-                  CustomButton(
-                    onPressed: () {
-                      setState(() {
-                        buy = false;
-                      });
-                    },
-                    text: 'Sell Crypto',
-                    textStyle: Theme.of(context).textTheme.bodySmall,
-                    borderRadius: 128,
-                    color:
-                        buy == false ? AppColors.kPrimary : AppColors.kScaffold,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 9, horizontal: 16),
-                  ),
-                ],
-              ),
+            child: CustomButton(
+              onPressed: () {},
+              text: 'Sell Crypto',
+              textStyle: Theme.of(context).textTheme.bodySmall,
+              borderRadius: 128,
+              color: AppColors.kPrimary,
+              padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 16),
             ),
           ),
           const SizedBox(height: 16),
@@ -105,32 +74,19 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                     ),
                   ],
                 ),
-                PopupMenuButton(
-                  itemBuilder: (context) {
-                    return TokenType.values.map((token) {
-                      return PopupMenuItem(
-                        onTap: () {
-                          setState(() {
-                            haveToken = token;
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return SelectCurrencyBottomSheet(
+                              onCurrencySelected: (currency) {
+                            setState(() {
+                              haveToken = currency;
+                            });
                           });
-                        },
-                        value: token,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 9,
-                              backgroundImage: AssetImage(token.asset),
-                              backgroundColor: AppColors.kScaffold,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              token.label,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList();
+                        });
                   },
                   child: Container(
                     padding:
@@ -189,57 +145,28 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                     ),
                   ],
                 ),
-                PopupMenuButton(
-                  itemBuilder: (context) {
-                    return TokenType.values.map((token) {
-                      return PopupMenuItem(
-                        onTap: () {
-                          setState(() {
-                            needToken = token;
-                          });
-                        },
-                        value: token,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 9,
-                              backgroundImage: AssetImage(token.asset),
-                              backgroundColor: AppColors.kScaffold,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              token.label,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList();
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: AppColors.kTextField,
-                      borderRadius: BorderRadius.circular(128),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          radius: 9,
-                          backgroundImage: AssetImage(needToken.asset),
-                          backgroundColor: AppColors.kScaffold,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          needToken.label,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.keyboard_arrow_down_rounded, size: 17)
-                      ],
-                    ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColors.kTextField,
+                    borderRadius: BorderRadius.circular(128),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(
+                        radius: 9,
+                        backgroundImage: AssetImage(TokenType.ngn.asset),
+                        backgroundColor: AppColors.kScaffold,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        TokenType.ngn.label,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(width: 20),
+                    ],
                   ),
                 ),
               ],
@@ -293,7 +220,7 @@ class _BuySellWidgetState extends State<BuySellWidget> {
           const SizedBox(height: 16),
           CustomButton(
             text: 'Exchange',
-            onPressed: () {},
+            onPressed: widget.exchange,
           ),
         ],
       ),

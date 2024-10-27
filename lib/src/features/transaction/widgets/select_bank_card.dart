@@ -1,19 +1,21 @@
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 
-class BankCard extends StatelessWidget {
+class SelectBankCard extends StatelessWidget {
   final String image;
   final String bankName;
   final String accountName;
   final String accountNumber;
   final VoidCallback onTap;
-  const BankCard({
+  final bool selected;
+  const SelectBankCard({
     super.key,
     required this.image,
     required this.bankName,
     required this.accountName,
     required this.accountNumber,
     required this.onTap,
+    required this.selected,
   });
 
   @override
@@ -57,6 +59,11 @@ class BankCard extends StatelessWidget {
                     ?.copyWith(color: AppColors.kHintText),
               ),
             ],
+          ),
+          trailing: Icon(
+            selected ? Icons.check_circle : Icons.circle_outlined,
+            size: 23,
+            color: selected ? AppColors.kGreenCheck : AppColors.kHintText,
           ),
         ),
       ),

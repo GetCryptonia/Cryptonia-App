@@ -1,8 +1,8 @@
 import 'package:cryptonia/src/features/history/screens/transaction_history_screen.dart';
 import 'package:cryptonia/src/features/home/models/nav_item.dart';
-import 'package:cryptonia/src/features/home/screens/home_screen.dart';
 import 'package:cryptonia/src/features/profile/screens/edit_profile/profile_screen.dart';
 import 'package:cryptonia/src/features/referral/referral_screen.dart';
+import 'package:cryptonia/src/features/transaction/screens/home_screen.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

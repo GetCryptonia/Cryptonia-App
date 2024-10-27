@@ -19,6 +19,7 @@ class CustomRoundedTextField extends StatefulWidget {
   final int maxLines;
   final Function(String)? onChanged;
   final VoidCallback? onTap;
+  final Color fillColor;
   const CustomRoundedTextField({
     super.key,
     this.label,
@@ -36,6 +37,7 @@ class CustomRoundedTextField extends StatefulWidget {
     this.obscureText = false,
     this.visibilityIcons = false,
     this.inputFormatters = const [],
+    this.fillColor = AppColors.kTextField,
   });
 
   @override
@@ -88,7 +90,7 @@ class _CustomRoundedTextFieldState extends State<CustomRoundedTextField> {
             ?.copyWith(color: AppColors.kHintText),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.kTextField),
+          borderSide: BorderSide(color: widget.fillColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -96,11 +98,11 @@ class _CustomRoundedTextFieldState extends State<CustomRoundedTextField> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.kTextField),
+          borderSide: BorderSide(color: widget.fillColor),
         ),
         prefixIcon: widget.prefixIcon,
         filled: true,
-        fillColor: AppColors.kTextField,
+        fillColor: widget.fillColor,
         suffixIcon: widget.suffixIcon != null
             ? widget.suffixIcon!
             : widget.visibilityIcons

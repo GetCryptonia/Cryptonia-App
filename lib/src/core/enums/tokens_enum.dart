@@ -43,6 +43,35 @@ extension TokenTypeExtension on TokenType {
     }
   }
 
+  String get network {
+    switch (this) {
+      case TokenType.btc:
+        return 'Bitcoin network';
+      case TokenType.eth:
+        return 'Ethereum network';
+      case TokenType.ngn:
+        return 'Naira';
+      case TokenType.sol:
+        return 'Solana network';
+      case TokenType.usdCBnb:
+        return 'Binance Smart Chain';
+      case TokenType.usdCErc:
+        return 'Ethereum network';
+      case TokenType.usdCSol:
+        return 'Solana network';
+      case TokenType.usdCTrc:
+        return 'Tron network';
+      case TokenType.usdTBnb:
+        return 'Binance Smart Chain';
+      case TokenType.usdTErc:
+        return 'Ethereum network';
+      case TokenType.usdTSol:
+        return 'Solana network';
+      case TokenType.usdTTrc:
+        return 'Tron network';
+    }
+  }
+
   String get asset {
     switch (this) {
       case TokenType.btc:
