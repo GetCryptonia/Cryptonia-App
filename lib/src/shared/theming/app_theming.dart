@@ -84,6 +84,8 @@ class AppColors {
 
   static const kContainerBg = Color(0xff181818); //#181818
 
+  static const kHistoryCategory = Color(0xff2C2C2C); //#2C2C2C
+
   static const kScaffold = Color(0xff0C0C0C); //#0C0C0C
 
   static const kTextField = Color(0xff1F1F1F); //#1F1F1F
@@ -91,6 +93,8 @@ class AppColors {
   static const kGreenCheck = Color(0xff0F973D); //#0F973D
 
   static const kRedCross = Color(0xffD42620); //#D42620
+
+  static const kYellowProcessing = Color(0xffF3A218); //#F3A218
 
   static const kTextColor = Color(0xffFFFFFF); //#FFFFFF
 

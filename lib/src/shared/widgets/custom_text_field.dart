@@ -11,24 +11,28 @@ class CustomRoundedTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool obscureText;
-  final bool? readOnly;
+  final bool readOnly;
   final Widget? prefixIcon;
   final List<TextInputFormatter> inputFormatters;
   final bool visibilityIcons;
   final int? maxLength;
+  final int maxLines;
   final Function(String)? onChanged;
+  final VoidCallback? onTap;
   const CustomRoundedTextField({
     super.key,
     this.label,
     this.hint,
+    this.onTap,
     this.initialValue,
     this.suffixIcon,
     this.controller,
     this.keyboardType,
-    this.readOnly,
     this.prefixIcon,
     this.maxLength,
+    this.maxLines = 1,
     this.onChanged,
+    this.readOnly = false,
     this.obscureText = false,
     this.visibilityIcons = false,
     this.inputFormatters = const [],
@@ -61,12 +65,16 @@ class _CustomRoundedTextFieldState extends State<CustomRoundedTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: widget.maxLines,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
       onChanged: widget.onChanged,
       // style: Theme.of(context).textTheme.bodyMedium,
       inputFormatters: widget.inputFormatters,
       obscureText: obscureText,
       controller: widget.controller,
       maxLength: widget.maxLength,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hint,

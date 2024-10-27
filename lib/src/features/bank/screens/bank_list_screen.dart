@@ -23,16 +23,14 @@ class _BankListScreenState extends State<BankListScreen> {
         padding: AppConstants.kScaffoldPadding,
         children: [
           BankCard(
-            image:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6dcuBlGF43-S2sxFusqq2R9Gtg9CJPOrzRQ&s',
+            image: AppConstants.palmPayPic,
             bankName: 'Palmpay',
             accountName: 'Temidayo Olayinka',
             accountNumber: '9069623646',
             onTap: () {},
           ),
           BankCard(
-            image:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6dcuBlGF43-S2sxFusqq2R9Gtg9CJPOrzRQ&s',
+            image: AppConstants.palmPayPic,
             bankName: 'Palmpay',
             accountName: 'Temidayo Olayinka',
             accountNumber: '9069623646',

@@ -72,7 +72,7 @@ class _CustomButtonState extends State<CustomButton> {
                 widget.text,
                 style: widget.textStyle ??
                     TextStylesTheme.elevatedButton
-                        .copyWith(color: Colors.white),
+                        .copyWith(color: widget.textColor ?? Colors.white),
                 overflow: TextOverflow.ellipsis,
               )
             ],

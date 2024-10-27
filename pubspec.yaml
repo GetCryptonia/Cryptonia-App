@@ -78,10 +78,12 @@ flutter:
      - assets/svgs/home/filled/
      - assets/svgs/home/outlined/
      - assets/svgs/profile/
-     - assets/svgs/profile/delete.svg/
      - assets/svgs/notification/
+     - assets/svgs/history/
 
      - assets/images/notification/
+     - assets/images/referral/
+     - assets/images/history/
      - assets/images/onboarding/
      - assets/images/avatars/
      - assets/images/home/
