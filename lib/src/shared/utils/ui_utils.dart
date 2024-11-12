@@ -34,10 +34,11 @@ class UiUtils {
     );
   }
 
-  static showSnackBar(BuildContext context, String text) {
+  static showSnackBar(BuildContext context, String text,
+      {Color color = AppColors.kPrimary}) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.kPrimary,
+        backgroundColor: color,
         content: Text(
           text,
           textAlign: TextAlign.center,

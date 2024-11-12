@@ -30,7 +30,10 @@ class ProfileActionTile extends StatelessWidget {
         height: 20,
         colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
       ),
-      title: Text(title),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
