@@ -3,7 +3,7 @@ class UserProfileModel {
   String email;
   bool emailVerified;
   String avatar;
-  String referralCode;
+  String? referralCode;
   String? firstName;
   String? lastName;
 
