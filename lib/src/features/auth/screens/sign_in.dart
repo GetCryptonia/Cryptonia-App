@@ -5,6 +5,7 @@ import 'package:cryptonia/src/features/auth/screens/enable_biometrics.dart';
 import 'package:cryptonia/src/features/auth/screens/enter_email.dart';
 import 'package:cryptonia/src/features/auth/screens/sign_up.dart';
 import 'package:cryptonia/src/features/home/screens/nav_home.dart';
+import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
@@ -186,6 +187,10 @@ class _SignInState extends State<SignIn> {
                                   );
                                   return;
                                 }
+
+                                await context
+                                    .read<ProfileProvider>()
+                                    .getAccount();
 
                                 //navigate to home screen
                                 PageNavigation.pushPage(

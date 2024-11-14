@@ -1,19 +1,14 @@
+import 'package:cryptonia/src/features/bank/models/account_model.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 
 class SelectBankCard extends StatelessWidget {
-  final String image;
-  final String bankName;
-  final String accountName;
-  final String accountNumber;
+  final AccountModel account;
   final VoidCallback onTap;
   final bool selected;
   const SelectBankCard({
     super.key,
-    required this.image,
-    required this.bankName,
-    required this.accountName,
-    required this.accountNumber,
+    required this.account,
     required this.onTap,
     required this.selected,
   });
@@ -29,15 +24,15 @@ class SelectBankCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: ListTile(
-          leading: CircleAvatar(
-            radius: 16,
-            backgroundImage: NetworkImage(image),
+          onTap: onTap,
+          title: Text(
+            account.accountName,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-          title: Text(accountName),
           subtitle: Row(
             children: [
               Text(
-                accountNumber,
+                account.accountNumber,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
@@ -51,12 +46,15 @@ class SelectBankCard extends StatelessWidget {
                     color: AppColors.kPrimary, shape: BoxShape.circle),
               ),
               const SizedBox(width: 8),
-              Text(
-                bankName,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: AppColors.kHintText),
+              Flexible(
+                child: Text(
+                  account.bankName,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: AppColors.kHintText),
+                ),
               ),
             ],
           ),
