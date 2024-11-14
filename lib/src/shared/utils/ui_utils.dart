@@ -1,3 +1,4 @@
+import 'package:cryptonia/src/core/network/api_response.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,17 @@ class UiUtils {
         );
       },
     );
+  }
+
+  static void displayResponse(BuildContext context, ApiResponse res) {
+    switch (res.status) {
+      case Status.success:
+        showSnackBar(context, res.errorMessage ?? res.message);
+        break;
+      case Status.error:
+        showErrorDialog(context, description: res.message);
+        break;
+    }
   }
 
   static void showErrorDialog(

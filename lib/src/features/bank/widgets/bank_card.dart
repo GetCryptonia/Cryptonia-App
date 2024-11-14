@@ -1,19 +1,17 @@
+import 'package:cryptonia/src/features/bank/models/account_model.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BankCard extends StatelessWidget {
-  final String image;
-  final String bankName;
-  final String accountName;
-  final String accountNumber;
+  final AccountModel account;
   final VoidCallback onTap;
+  final VoidCallback onDelete;
   const BankCard({
     super.key,
-    required this.image,
-    required this.bankName,
-    required this.accountName,
-    required this.accountNumber,
+    required this.account,
     required this.onTap,
+    required this.onDelete,
   });
 
   @override
@@ -27,15 +25,30 @@ class BankCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: ListTile(
-          leading: CircleAvatar(
-            radius: 16,
-            backgroundImage: NetworkImage(image),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+          trailing: InkWell(
+            onTap: onDelete,
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: AppColors.kContainerBg,
+              child: SvgPicture.asset(
+                'assets/svgs/profile/delete.svg',
+                width: 24,
+                height: 24,
+                colorFilter:
+                    ColorFilter.mode(AppColors.kTextColor, BlendMode.srcIn),
+              ),
+            ),
           ),
-          title: Text(accountName),
+          title: Text(
+            account.accountName,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           subtitle: Row(
             children: [
               Text(
-                accountNumber,
+                account.accountNumber,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
@@ -49,12 +62,15 @@ class BankCard extends StatelessWidget {
                     color: AppColors.kPrimary, shape: BoxShape.circle),
               ),
               const SizedBox(width: 8),
-              Text(
-                bankName,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: AppColors.kHintText),
+              Flexible(
+                child: Text(
+                  account.bankName,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: AppColors.kHintText),
+                ),
               ),
             ],
           ),

@@ -86,7 +86,7 @@ class AccountService {
         "categoryId": categoryId
       };
 
-      final response = await dio.get(_accountsPath, data: body);
+      final response = await dio.post(_accountsPath, data: body);
 
       final data = response.data;
 
@@ -113,8 +113,11 @@ class AccountService {
 
       final data = response.data;
 
-      List<AccountModel> accounts =
-          data['data'].map((e) => AccountModel.fromJson(e)).toList();
+      print(data);
+
+      List<AccountModel> accounts = data['data']
+          .map<AccountModel>((e) => AccountModel.fromJson(e))
+          .toList();
 
       return ApiResponse.success(message: data['message'], data: accounts);
     } catch (e) {

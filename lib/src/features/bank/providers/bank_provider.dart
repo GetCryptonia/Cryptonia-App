@@ -108,10 +108,13 @@ class BankProvider with ChangeNotifier {
     return response;
   }
 
-  Future<ApiResponse> fetchUserAccounts() async {
-    String? token = AuthProvider().token;
+  Future<ApiResponse> fetchUserAccounts(BuildContext context) async {
+    print('Hit the provider');
+    String? token = AuthProvider().getToken(context);
 
     if (token == null) return ApiResponse.exception('Token not found');
+
+    print('About to fetch accounts');
 
     ApiResponse response = await _accountService.fetchUserAccounts(token);
 
@@ -132,12 +135,12 @@ class BankProvider with ChangeNotifier {
     ApiResponse response =
         await _accountService.deleteUserAccount(token: token, id: accountId);
 
-    if (response.status == Status.error || response.data == null) {
-      return response;
-    }
+    if (response.status == Status.error) return response;
 
-    accounts =
-        userAccounts.where((account) => account.id != accountId).toList();
+    List<AccountModel> modifiedAccounts =
+        accounts.where((a) => a.id != accountId).toList();
+
+    accounts = modifiedAccounts;
 
     return response;
   }

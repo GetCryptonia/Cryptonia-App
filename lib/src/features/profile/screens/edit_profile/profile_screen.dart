@@ -36,9 +36,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               const SizedBox(height: 16),
               ProfileCard(
-                avatar: 'assets/images/avatars/1.png',
-                email: 'spielereinzig@gmail.com',
-                username: 'SpielerEinzig',
+                avatar:
+                    authProv.profile?.avatar ?? 'assets/images/avatars/1.png',
+                email: authProv.profile?.email ?? 'Email',
+                username: authProv.profile?.username ?? 'Username',
                 avatarTap: () {},
                 editTap: () {
                   PageNavigation.pushPage(

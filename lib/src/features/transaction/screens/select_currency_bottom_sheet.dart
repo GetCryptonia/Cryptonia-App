@@ -33,7 +33,7 @@ class _SelectCurrencyBottomSheetState extends State<SelectCurrencyBottomSheet> {
             .toList();
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.sizeOf(context).height * 0.8,
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.only(

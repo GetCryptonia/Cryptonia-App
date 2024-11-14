@@ -11,46 +11,48 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 
+String? userToken;
+String? _forgotPasswordEmail;
+String? _forgotPasswordOtp;
+SignupRequestModel? _signupRequestModel;
+LoginDetailsModel? _loginDetails;
+
 class AuthProvider with ChangeNotifier {
   final StorageService _storageService = StorageService();
   final AuthService _authService = AuthService();
 
-  String? token;
   String? getToken(BuildContext context) {
-    if (token == null || JwtDecoder.isExpired(token!)) {
+    if (userToken == null || JwtDecoder.isExpired(userToken!)) {
       PageNavigation.replaceAll(context, const SignIn());
       return null;
     }
-    return token;
+    return userToken;
   }
 
-  set authToken(String? value) {
-    token = value;
+  String? get token => userToken;
+  set token(String? value) {
+    userToken = value;
     notifyListeners();
   }
 
-  String? _forgotPasswordEmail;
   String? get forgotPasswordEmail => _forgotPasswordEmail;
   set forgotPasswordEmail(String? value) {
     _forgotPasswordEmail = value;
     notifyListeners();
   }
 
-  String? _forgotPasswordOtp;
   String? get forgotPasswordOtp => _forgotPasswordOtp;
   set forgotPasswordOtp(String? value) {
     _forgotPasswordOtp = value;
     notifyListeners();
   }
 
-  SignupRequestModel? _signupRequestModel;
   SignupRequestModel? get signupRequestModel => _signupRequestModel;
   set signupRequestModel(SignupRequestModel? value) {
     _signupRequestModel = value;
     notifyListeners();
   }
 
-  LoginDetailsModel? _loginDetails;
   LoginDetailsModel? get loginDetails => _loginDetails;
   set loginDetails(LoginDetailsModel? value) {
     _loginDetails = value;

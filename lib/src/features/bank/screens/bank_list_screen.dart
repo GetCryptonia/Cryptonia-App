@@ -1,8 +1,14 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
+import 'package:cryptonia/src/core/network/api_response.dart';
+import 'package:cryptonia/src/features/bank/providers/bank_provider.dart';
 import 'package:cryptonia/src/features/bank/screens/add_bank_screen.dart';
 import 'package:cryptonia/src/features/bank/widgets/bank_card.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
+import 'package:cryptonia/src/shared/utils/ui_utils.dart';
+import 'package:cryptonia/src/shared/widgets/api_response_future_builder.dart';
+import 'package:cryptonia/src/shared/widgets/confirmation_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BankListScreen extends StatefulWidget {
   const BankListScreen({super.key});
@@ -12,6 +18,14 @@ class BankListScreen extends StatefulWidget {
 }
 
 class _BankListScreenState extends State<BankListScreen> {
+  late Future<ApiResponse> _fetchAccounts;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAccounts = context.read<BankProvider>().fetchUserAccounts(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,36 +33,68 @@ class _BankListScreenState extends State<BankListScreen> {
         automaticallyImplyLeading: true,
         title: const Text('Bank Account'),
       ),
-      body: ListView(
-        padding: AppConstants.kScaffoldPadding,
-        children: [
-          BankCard(
-            image: AppConstants.palmPayPic,
-            bankName: 'Palmpay',
-            accountName: 'Temidayo Olayinka',
-            accountNumber: '9069623646',
-            onTap: () {},
-          ),
-          BankCard(
-            image: AppConstants.palmPayPic,
-            bankName: 'Palmpay',
-            accountName: 'Temidayo Olayinka',
-            accountNumber: '9069623646',
-            onTap: () {},
-          ),
-          TextButton(
-            onPressed: () =>
-                PageNavigation.pushPage(context, const AddBankScreen()),
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
+      body: ApiResponseFutureBuilder(
+        future: _fetchAccounts,
+        child: Consumer<BankProvider>(
+          builder: (context, bankProv, _) {
+            return ListView(
+              padding: AppConstants.kScaffoldPadding,
               children: [
-                Icon(Icons.add_circle_outline_rounded, size: 20),
-                SizedBox(width: 10),
-                Text('Add new account'),
+                if (bankProv.accounts.isEmpty) ...[
+                  const SizedBox(height: 16),
+                  Center(
+                    child: Text(
+                      'No bank account added yet',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ],
+                ...bankProv.accounts.map(
+                  (account) {
+                    return BankCard(
+                      account: account,
+                      onTap: () {},
+                      onDelete: () async {
+                        final ApiResponse? res = await showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return ConfirmationBottomSheet(
+                              message:
+                                  'Are you sure you want delete this account?',
+                              onTap: () async {
+                                ApiResponse response = await bankProv
+                                    .removeUserAccount(account.id);
+
+                                PageNavigation.pop(context, response);
+                              },
+                            );
+                          },
+                        );
+
+                        if (res == null) return;
+
+                        UiUtils.displayResponse(context, res);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () =>
+                      PageNavigation.pushPage(context, const AddBankScreen()),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.add_circle_outline_rounded, size: 20),
+                      SizedBox(width: 10),
+                      Text('Add new account'),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }

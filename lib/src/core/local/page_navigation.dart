@@ -16,6 +16,11 @@ class PageNavigation {
     });
   }
 
+  //pass data while popping page
+  static void pop(BuildContext context, dynamic data) {
+    Navigator.pop(context, data);
+  }
+
   static void replaceAll(BuildContext context, Widget page) =>
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => page), (route) => false);
