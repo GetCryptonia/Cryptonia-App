@@ -5,11 +5,12 @@ class EmptyWidget extends StatelessWidget {
   final String image;
   final String title;
   final String body;
-  const EmptyWidget(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.body});
+  const EmptyWidget({
+    super.key,
+    this.image = 'assets/images/notification/notification-empty.png',
+    required this.title,
+    required this.body,
+  });
 
   @override
   Widget build(BuildContext context) {

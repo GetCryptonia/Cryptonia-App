@@ -1,10 +1,13 @@
+import 'package:cryptonia/src/features/notification/models/notification_model.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/date_time_utils.dart';
 import 'package:flutter/material.dart';
 
 class NotificationCard extends StatelessWidget {
   final VoidCallback onTap;
-  const NotificationCard({super.key, required this.onTap});
+  final NotificationModel notification;
+  const NotificationCard(
+      {super.key, required this.onTap, required this.notification});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class NotificationCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -31,7 +35,7 @@ class NotificationCard extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    'Transaction Successful!',
+                    notification.title,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
@@ -39,7 +43,8 @@ class NotificationCard extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Your Sale of 300 USDT is now completed',
+              notification.message,
+              textAlign: TextAlign.left,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
@@ -49,7 +54,7 @@ class NotificationCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  DateTime.now().toReadable,
+                  notification.createdAt.toReadable,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
