@@ -13,7 +13,7 @@ class BuySellWidget extends StatefulWidget {
 }
 
 class _BuySellWidgetState extends State<BuySellWidget> {
-  TokenType haveToken = TokenType.btc;
+  TokenType haveToken = TokenType.values.first;
   @override
   Widget build(BuildContext context) {
     return Container(

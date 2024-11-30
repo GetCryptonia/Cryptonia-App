@@ -1,5 +1,6 @@
 import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
 import 'package:cryptonia/src/features/bank/providers/bank_provider.dart';
+import 'package:cryptonia/src/features/history/providers/history_provider.dart';
 import 'package:cryptonia/src/features/kyc/provider/kyc_provider.dart';
 import 'package:cryptonia/src/features/notification/provider/notification_provider.dart';
 import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
@@ -17,6 +18,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => BankProvider()),
         ChangeNotifierProvider(create: (_) => KycProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
       ],
       child: const MyApp(),
     ),
