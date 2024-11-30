@@ -1,5 +1,5 @@
-import 'package:cryptonia/src/core/enums/transaction_status.dart';
 import 'package:cryptonia/src/core/local/page_navigation.dart';
+import 'package:cryptonia/src/features/transaction/utils/enums/transaction_status.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/date_time_utils.dart';

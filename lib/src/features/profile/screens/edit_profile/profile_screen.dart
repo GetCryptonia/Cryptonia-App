@@ -1,6 +1,8 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/core/network/api_response.dart';
 import 'package:cryptonia/src/features/bank/screens/bank_list_screen.dart';
+import 'package:cryptonia/src/features/kyc/screens/verification_status.dart';
+import 'package:cryptonia/src/features/kyc/utils/enums/kyc_type.dart';
 import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
 import 'package:cryptonia/src/features/profile/screens/about_us/about_us.dart';
 import 'package:cryptonia/src/features/profile/screens/edit_profile/personal_information_screen.dart';
@@ -70,7 +72,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ProfileActionTile(
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return const VerificationStatus();
+                              });
+                        },
                         icon: 'assets/svgs/profile/verification.svg',
                         title: 'Verification',
                         trailingPrefix: Padding(
@@ -82,7 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: AppColors.kPrimary,
                               borderRadius: BorderRadius.circular(128),
                             ),
-                            child: Text('1/4 Completed'),
+                            child: Text(
+                                '${profileProv.profile?.kyc?.verification(profileProv.profile?.emailVerified ?? false) ?? 1}/${KycType.values.length + 1} Completed'),
                           ),
                         ),
                       ),

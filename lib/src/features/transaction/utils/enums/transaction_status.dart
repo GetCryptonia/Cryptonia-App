@@ -1,7 +1,7 @@
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:flutter/material.dart';
 
-enum TransactionStatus { processing, successful, expired }
+enum TransactionStatus { processing, successful, cancelled }
 
 extension TransactionStatusEnum on TransactionStatus {
   String get label {
@@ -10,8 +10,8 @@ extension TransactionStatusEnum on TransactionStatus {
         return 'Processing';
       case TransactionStatus.successful:
         return 'Successful';
-      case TransactionStatus.expired:
-        return 'Expired';
+      case TransactionStatus.cancelled:
+        return 'Cancelled';
     }
   }
 
@@ -23,7 +23,7 @@ extension TransactionStatusEnum on TransactionStatus {
       case TransactionStatus.successful:
         return const Icon(Icons.check_circle,
             size: 20, color: AppColors.kGreenCheck);
-      case TransactionStatus.expired:
+      case TransactionStatus.cancelled:
         return const Icon(Icons.info, size: 20, color: AppColors.kRedCross);
     }
   }

@@ -45,9 +45,6 @@ class ApiResponse<T> {
 
       case DioExceptionType.badResponse:
         final data = e.response?.data;
-
-        print(data);
-
         return ApiResponse(
           message: data['message'],
           errorMessage: data['error'],

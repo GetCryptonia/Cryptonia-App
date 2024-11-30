@@ -1,5 +1,5 @@
-import 'package:cryptonia/src/core/enums/tokens_enum.dart';
 import 'package:cryptonia/src/core/local/page_navigation.dart';
+import 'package:cryptonia/src/features/transaction/utils/enums/tokens_enum.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
-import 'package:cryptonia/src/features/kyc/screens/nin_verified.dart';
+import 'package:cryptonia/src/features/kyc/screens/nin/nin_verified.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:cryptonia/src/shared/widgets/custom_text_field.dart';

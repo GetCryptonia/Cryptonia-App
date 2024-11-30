@@ -28,7 +28,7 @@ class UiUtils {
         showSnackBar(context, res.errorMessage ?? res.message);
         break;
       case Status.error:
-        showErrorDialog(context, description: res.message);
+        showErrorDialog(context, description: res.errorMessage ?? res.message);
         break;
     }
   }
