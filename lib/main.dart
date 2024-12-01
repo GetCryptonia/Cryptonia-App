@@ -4,6 +4,7 @@ import 'package:cryptonia/src/features/history/providers/history_provider.dart';
 import 'package:cryptonia/src/features/kyc/provider/kyc_provider.dart';
 import 'package:cryptonia/src/features/notification/provider/notification_provider.dart';
 import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
+import 'package:cryptonia/src/features/transaction/providers/transaction_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/splash.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => KycProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => HistoryProvider()),
+        ChangeNotifierProvider(create: (_) => TransactionProvider()),
       ],
       child: const MyApp(),
     ),

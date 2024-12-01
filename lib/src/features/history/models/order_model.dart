@@ -8,8 +8,8 @@ class OrderModel {
   TokenType token;
   String address;
   TransactionStatus status;
-  double tokenAmount;
-  double fiatAmount;
+  num tokenAmount;
+  num fiatAmount;
   String receiverBank;
   String receiverBankCode;
   String receiverSessionId;
@@ -43,8 +43,8 @@ class OrderModel {
       address: json['address'],
       status:
           TransactionStatus.values.firstWhere((e) => e.name == json['status']),
-      tokenAmount: json['tokenAmount'].toDouble(),
-      fiatAmount: json['fiatAmount'].toDouble(),
+      tokenAmount: json['tokenAmount'],
+      fiatAmount: json['fiatAmount'],
       receiverBank: json['receiverBank'],
       receiverBankCode: json['receiverBankCode'],
       receiverSessionId: json['receiverSessionId'],

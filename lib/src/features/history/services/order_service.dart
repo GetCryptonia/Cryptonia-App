@@ -89,4 +89,30 @@ class OrderService {
       }
     }
   }
+
+  Future<ApiResponse> fetchOrderById({
+    required String token,
+    required String orderId,
+  }) async {
+    try {
+      final String endpoint = '$orderId/';
+
+      final Dio dio = Dio();
+      dio.options.headers.addAll({"Authorization": "Bearer $token"});
+
+      final response = await dio.get("$_path$endpoint");
+
+      final data = response.data;
+
+      OrderModel order = OrderModel.fromJson(data['data']);
+
+      return ApiResponse.success(message: data['message'], data: order);
+    } catch (e) {
+      if (e is DioException) {
+        return ApiResponse.dioException(e);
+      } else {
+        return ApiResponse.exception(e.toString());
+      }
+    }
+  }
 }

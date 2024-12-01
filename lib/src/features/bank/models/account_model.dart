@@ -1,3 +1,5 @@
+import 'package:cryptonia/src/features/bank/models/bank_model.dart';
+
 class AccountModel {
   String id;
   String userId;
@@ -42,6 +44,14 @@ class AccountModel {
       accountName: json['accountName'],
       categoryId: json['categoryId'],
       createdAt: DateTime.parse(json['createdAt']).toLocal(),
+    );
+  }
+
+  toBank() {
+    return BankModel(
+      name: bankName,
+      bankCode: bankCode,
+      categoryId: categoryId,
     );
   }
 

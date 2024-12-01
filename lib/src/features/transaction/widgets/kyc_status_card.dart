@@ -47,7 +47,7 @@ class KycStatusCard extends StatelessWidget {
                       SvgPicture.asset('assets/svgs/home/medal-line.svg',
                           width: 8, height: 10),
                       const SizedBox(width: 6),
-                      Text('$kycLevel/4 Completed',
+                      Text('$kycLevel/2 Completed',
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),

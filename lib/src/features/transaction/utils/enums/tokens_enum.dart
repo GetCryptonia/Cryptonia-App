@@ -1,5 +1,4 @@
 enum TokenType {
-  ngn,
   usdCErc,
   usdTBnb,
   usdTTrc,
@@ -9,8 +8,6 @@ enum TokenType {
 extension TokenTypeExtension on TokenType {
   String get label {
     switch (this) {
-      case TokenType.ngn:
-        return 'NGN';
       case TokenType.usdCErc:
         return 'USDC (ERC)';
       case TokenType.usdCSol:
@@ -24,23 +21,19 @@ extension TokenTypeExtension on TokenType {
 
   String get network {
     switch (this) {
-      case TokenType.ngn:
-        return 'Naira';
       case TokenType.usdCErc:
-        return 'Ethereum network';
+        return 'Ethereum';
       case TokenType.usdCSol:
-        return 'Solana network';
+        return 'Solana';
       case TokenType.usdTBnb:
         return 'Binance Smart Chain';
       case TokenType.usdTTrc:
-        return 'Tron network';
+        return 'Tron';
     }
   }
 
   String get asset {
     switch (this) {
-      case TokenType.ngn:
-        return 'assets/images/tokens/ngn.png';
       case TokenType.usdCErc:
         return 'assets/images/tokens/usdc-erc.png';
       case TokenType.usdCSol:
@@ -55,8 +48,6 @@ extension TokenTypeExtension on TokenType {
   //USDC(ERC20), USDT(9BEP20), USDT(TRC20), USDC(SOL),
   String get symbol {
     switch (this) {
-      case TokenType.ngn:
-        return 'NGN';
       case TokenType.usdCErc:
         return 'USDC(ETH)';
       case TokenType.usdCSol:

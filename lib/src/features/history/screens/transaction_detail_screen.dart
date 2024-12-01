@@ -7,7 +7,7 @@ import 'package:cryptonia/src/features/transaction/utils/enums/transaction_statu
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/date_time_utils.dart';
-import 'package:cryptonia/src/shared/utils/double_utils.dart';
+import 'package:cryptonia/src/shared/utils/num_extension.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
 import 'package:cryptonia/src/shared/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +103,7 @@ class _TransactionDetailScreenState extends State<TransactionDetailScreen> {
                           _breakdownRow(
                               title: 'Rate',
                               value:
-                                  '${order.fiatAmount / order.tokenAmount} NGN/${order.token.symbol}'),
+                                  '${(order.fiatAmount / order.tokenAmount).toReadable} NGN/${order.token.symbol}'),
                           const Divider(),
                           //_breakdownRow(title: 'Fee', value: 'USDT 0.50'),
                           const Divider(),
