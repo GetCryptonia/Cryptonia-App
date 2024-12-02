@@ -7,6 +7,12 @@ import 'package:flutter/material.dart';
 class NotificationProvider with ChangeNotifier {
   final NotificationService _service = NotificationService();
 
+  void clearAll() {
+    notification = null;
+    notificationList = [];
+    notifyListeners();
+  }
+
   NotificationModel? currentNotification;
   NotificationModel? get notification => currentNotification;
   set notification(NotificationModel? value) {

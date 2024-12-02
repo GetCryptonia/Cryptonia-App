@@ -9,6 +9,12 @@ import 'package:flutter/material.dart';
 class HistoryProvider with ChangeNotifier {
   final OrderService _orderService = OrderService();
 
+  void clearAll() {
+    order = null;
+    orders = [];
+    notifyListeners();
+  }
+
   OrderModel? currentOrder;
   OrderModel? get order => currentOrder;
   set order(OrderModel? value) {

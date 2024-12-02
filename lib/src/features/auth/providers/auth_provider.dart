@@ -21,6 +21,14 @@ class AuthProvider with ChangeNotifier {
   final StorageService _storageService = StorageService();
   final AuthService _authService = AuthService();
 
+  void clearAll() {
+    token = null;
+    forgotPasswordEmail = null;
+    forgotPasswordOtp = null;
+    signupRequestModel = null;
+    notifyListeners();
+  }
+
   String? getToken(BuildContext context) {
     if (userToken == null || JwtDecoder.isExpired(userToken!)) {
       PageNavigation.replaceAll(context, const SignIn());

@@ -38,121 +38,127 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, historyProv, _) {
             return Consumer<ProfileProvider>(
               builder: (context, profileProv, _) {
-                return Scaffold(
-                  body: SafeArea(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 16, bottom: 32),
-                          color: AppColors.kContainerBg,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                    text:
-                                        'Welcome, ${profileProv.profile?.username ?? ""}\n',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(color: AppColors.kFadedText),
-                                    children: [
-                                      TextSpan(
-                                        text: "Let's do business",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
-                                      ),
-                                    ]),
-                              ),
-                              InkWell(
-                                onTap: () => PageNavigation.pushPage(
-                                    context, const NotificationList()),
-                                child: SvgPicture.asset(
-                                    'assets/svgs/home/notification.svg',
-                                    width: 20,
-                                    height: 20),
-                              ),
-                            ],
+                return GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Scaffold(
+                    body: SafeArea(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                                left: 16, right: 16, top: 16, bottom: 32),
+                            color: AppColors.kContainerBg,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text:
+                                          'Welcome, ${profileProv.profile?.username ?? ""}\n',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              color: AppColors.kFadedText),
+                                      children: [
+                                        TextSpan(
+                                          text: "Let's do business",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                      ]),
+                                ),
+                                InkWell(
+                                  onTap: () => PageNavigation.pushPage(
+                                      context, const NotificationList()),
+                                  child: SvgPicture.asset(
+                                      'assets/svgs/home/notification.svg',
+                                      width: 20,
+                                      height: 20),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  if (profileProv.profile?.kyc != KycType.bvn)
-                                    KycStatusCard(
-                                      onTap: () {
-                                        showModalBottomSheet(
-                                            context: context,
-                                            builder: (context) {
-                                              return const VerificationStatus();
-                                            });
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    if (profileProv.profile?.kyc != KycType.bvn)
+                                      KycStatusCard(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: (context) {
+                                                return const VerificationStatus();
+                                              });
+                                        },
+                                        kycLevel: profileProv.profile?.kyc
+                                                ?.verification(profileProv
+                                                        .profile
+                                                        ?.emailVerified ??
+                                                    false) ??
+                                            1,
+                                        kycStatus: 'Your account is limited. '
+                                            'Complete KYC for unlimited conversion.',
+                                      ),
+                                    const SizedBox(height: 16),
+                                    BuySellWidget(
+                                      exchange: () async {
+                                        UiUtils.showLoadingIndicatorDialog(
+                                            context);
+
+                                        //fetch orders that are still processing and make sure it is empty
+                                        final res =
+                                            await historyProv.filterOrders(
+                                                status: TransactionStatus
+                                                    .processing);
+
+                                        PageNavigation.popPage(context);
+
+                                        if (res.status != Status.success) {
+                                          UiUtils.displayResponse(context, res);
+                                          return;
+                                        }
+
+                                        if (historyProv
+                                            .filteredOrders.isNotEmpty) {
+                                          UiUtils.showErrorDialog(context,
+                                              description:
+                                                  'You have a pending order. '
+                                                  'Complete that order to create new ones.');
+                                          return;
+                                        }
+
+                                        await PageNavigation.pushPage(
+                                            context, const SelectBank());
+
+                                        historyProv.filteredOrders = [];
                                       },
-                                      kycLevel: profileProv.profile?.kyc
-                                              ?.verification(profileProv
-                                                      .profile?.emailVerified ??
-                                                  false) ??
-                                          1,
-                                      kycStatus: 'Your account is limited. '
-                                          'Complete KYC for unlimited conversion.',
                                     ),
-                                  const SizedBox(height: 16),
-                                  BuySellWidget(
-                                    exchange: () async {
-                                      UiUtils.showLoadingIndicatorDialog(
-                                          context);
-
-                                      //fetch orders that are still processing and make sure it is empty
-                                      final res =
-                                          await historyProv.filterOrders(
-                                              status:
-                                                  TransactionStatus.processing);
-
-                                      PageNavigation.popPage(context);
-
-                                      if (res.status != Status.success) {
-                                        UiUtils.displayResponse(context, res);
-                                        return;
-                                      }
-
-                                      if (historyProv
-                                          .filteredOrders.isNotEmpty) {
-                                        UiUtils.showErrorDialog(context,
-                                            description:
-                                                'You have a pending order. '
-                                                'Complete that order to create new ones.');
-                                        return;
-                                      }
-
-                                      await PageNavigation.pushPage(
-                                          context, const SelectBank());
-
-                                      historyProv.filteredOrders = [];
-                                    },
-                                  ),
-                                  const SizedBox(height: 16),
-                                  // Container(
-                                  //   height: 100,
-                                  //   decoration: BoxDecoration(
-                                  //     borderRadius: BorderRadius.circular(7),
-                                  //     image: const DecorationImage(
-                                  //       fit: BoxFit.cover,
-                                  //       image: AssetImage(
-                                  //           'assets/images/home/referral.png'),
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                ],
+                                    const SizedBox(height: 16),
+                                    // Container(
+                                    //   height: 100,
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(7),
+                                    //     image: const DecorationImage(
+                                    //       fit: BoxFit.cover,
+                                    //       image: AssetImage(
+                                    //           'assets/images/home/referral.png'),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

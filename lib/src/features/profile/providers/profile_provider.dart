@@ -8,6 +8,19 @@ import 'package:flutter/material.dart';
 class ProfileProvider with ChangeNotifier {
   final ProfileService _profileService = ProfileService();
 
+  void clearAll() {
+    editEmailModel = null;
+    userProfileModel = null;
+    notifyListeners();
+  }
+
+  String? deleteAccountPassword;
+  String? get password => deleteAccountPassword;
+  set password(String? value) {
+    deleteAccountPassword = value;
+    notifyListeners();
+  }
+
   EditEmailModel? editEmailModel;
   EditEmailModel? get editEmail => editEmailModel;
   set editEmail(EditEmailModel? value) {
@@ -102,16 +115,15 @@ class ProfileProvider with ChangeNotifier {
   }
 
   //delete account
-  Future<ApiResponse> deleteAccount({
-    required String otp,
-    required String password,
-  }) async {
+  Future<ApiResponse> deleteAccount(String otp) async {
     String? token = AuthProvider().token;
 
     if (token == null) return ApiResponse.exception("Couldn't perform request");
 
+    if (password == null) return ApiResponse.exception("Password is required");
+
     final res = await _profileService.deleteAccount(
-        token: token, otp: otp, password: password);
+        token: token, otp: otp, password: password!);
 
     return res;
   }

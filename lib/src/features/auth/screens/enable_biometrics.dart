@@ -92,14 +92,14 @@ class _EnableBiometricsState extends State<EnableBiometrics> {
                             return;
                           }
 
-                          PageNavigation.pushPage(context, const NavHome());
+                          PageNavigation.replaceAll(context, const NavHome());
                         },
                       ),
                       const SizedBox(height: 16),
                       CustomButton(
                         text: 'No Thanks',
                         onPressed: () =>
-                            PageNavigation.pushPage(context, const NavHome()),
+                            PageNavigation.replaceAll(context, const NavHome()),
                         color: AppColors.kTextField,
                       ),
                     ],

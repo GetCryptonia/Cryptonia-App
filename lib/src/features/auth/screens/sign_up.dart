@@ -10,6 +10,7 @@ import 'package:cryptonia/src/shared/widgets/custom_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -107,7 +108,10 @@ class _SignUpState extends State<SignUp> {
                                                 decoration:
                                                     TextDecoration.underline),
                                         recognizer: TapGestureRecognizer()
-                                          ..onTap = () {},
+                                          ..onTap = () async {
+                                            await launchUrl(Uri.parse(
+                                                'https://getcryptonia.com/terms-of-use'));
+                                          },
                                       ),
                                       TextSpan(
                                         text: ' and ',
@@ -127,7 +131,10 @@ class _SignUpState extends State<SignUp> {
                                                 decoration:
                                                     TextDecoration.underline),
                                         recognizer: TapGestureRecognizer()
-                                          ..onTap = () {},
+                                          ..onTap = () async {
+                                            await launchUrl(Uri.parse(
+                                                'https://getcryptonia.com/privacy-policy'));
+                                          },
                                       ),
                                       TextSpan(
                                         text: ' of Cryptonia Ltd.',

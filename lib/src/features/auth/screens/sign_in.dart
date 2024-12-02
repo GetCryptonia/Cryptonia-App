@@ -193,7 +193,7 @@ class _SignInState extends State<SignIn> {
                                     .getAccount();
 
                                 //navigate to home screen
-                                PageNavigation.pushPage(
+                                PageNavigation.replaceAll(
                                     context, const NavHome());
                               },
                               child: Container(

@@ -1,15 +1,20 @@
 import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/core/network/api_response.dart';
+import 'package:cryptonia/src/features/auth/screens/sign_in.dart';
+import 'package:cryptonia/src/features/bank/providers/bank_provider.dart';
 import 'package:cryptonia/src/features/bank/screens/bank_list_screen.dart';
+import 'package:cryptonia/src/features/history/providers/history_provider.dart';
+import 'package:cryptonia/src/features/kyc/provider/kyc_provider.dart';
 import 'package:cryptonia/src/features/kyc/screens/verification_status.dart';
 import 'package:cryptonia/src/features/kyc/utils/enums/kyc_type.dart';
+import 'package:cryptonia/src/features/notification/provider/notification_provider.dart';
 import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
 import 'package:cryptonia/src/features/profile/screens/about_us/about_us.dart';
 import 'package:cryptonia/src/features/profile/screens/edit_profile/personal_information_screen.dart';
 import 'package:cryptonia/src/features/profile/screens/help_and_support/help_and_support.dart';
-import 'package:cryptonia/src/features/profile/screens/security/security_screen.dart';
 import 'package:cryptonia/src/features/profile/widgets/profile_action_tile.dart';
 import 'package:cryptonia/src/features/profile/widgets/profile_card.dart';
+import 'package:cryptonia/src/features/transaction/providers/transaction_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/widgets/api_response_future_builder.dart';
@@ -101,12 +106,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         icon: 'assets/svgs/profile/bank.svg',
                         title: 'Bank Account',
                       ),
-                      ProfileActionTile(
-                        onTap: () => PageNavigation.pushPage(
-                            context, const SecurityScreen()),
-                        icon: 'assets/svgs/profile/security.svg',
-                        title: 'Security',
-                      ),
+                      // ProfileActionTile(
+                      //   onTap: () => PageNavigation.pushPage(
+                      //       context, const SecurityScreen()),
+                      //   icon: 'assets/svgs/profile/security.svg',
+                      //   title: 'Security',
+                      // ),
                       ProfileActionTile(
                         onTap: () {
                           PageNavigation.pushPage(
@@ -144,7 +149,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       builder: (context) {
                         return ConfirmationBottomSheet(
                           message: 'Are you sure you want to sign out?',
-                          onTap: () {},
+                          onTap: () async {
+                            //clear all and replace page with the login screen and pop all stack
+
+                            context.read<TransactionProvider>().clearAll();
+                            context.read<HistoryProvider>().clearAll();
+                            context.read<NotificationProvider>().clearAll();
+                            context.read<KycProvider>().clearAll();
+                            context.read<BankProvider>().clearAll();
+
+                            PageNavigation.replaceAll(context, const SignIn());
+                          },
                         );
                       },
                     ),

@@ -13,6 +13,12 @@ import 'package:flutter/material.dart';
 class TransactionProvider with ChangeNotifier {
   final TransactionService _service = TransactionService();
 
+  void clearAll() {
+    orderAmount = null;
+    sellOrder = null;
+    notifyListeners();
+  }
+
   TokenType tokenTypeEnum = TokenType.usdTBnb;
   TokenType get token => tokenTypeEnum;
   set token(token) {

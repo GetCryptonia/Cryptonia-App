@@ -48,6 +48,7 @@ class AuthService {
         "email": email,
         "password": password,
         "avatar": avatar,
+        "currency": 'NGN',
         "referralCode": referralCode
       };
 

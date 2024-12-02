@@ -8,6 +8,12 @@ import 'package:flutter/material.dart';
 
 class KycProvider with ChangeNotifier {
   final KycService _service = KycService();
+
+  void clearAll() {
+    number = null;
+    notifyListeners();
+  }
+
   String? kycNumber;
   String? get number => kycNumber;
   set number(String? value) {

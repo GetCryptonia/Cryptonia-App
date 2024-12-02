@@ -44,7 +44,7 @@ class TransactionTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '${order.fiatAmount.toReadable} ${order.token.label}',
+              '${order.tokenAmount.toReadable} ${order.token.label}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 8),

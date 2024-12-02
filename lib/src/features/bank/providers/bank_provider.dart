@@ -9,6 +9,15 @@ import 'package:flutter/material.dart';
 class BankProvider with ChangeNotifier {
   final AccountService _accountService = AccountService();
 
+  void clearAll() {
+    banks = [];
+    accounts = [];
+    accountName = null;
+    selectedAccount = null;
+    selectedBank = null;
+    notifyListeners();
+  }
+
   List<BankModel> allBanks = [];
   List<BankModel> get banks => allBanks;
   set banks(List<BankModel> value) {

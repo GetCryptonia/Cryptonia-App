@@ -53,7 +53,7 @@ class _VerificationStatusState extends State<VerificationStatus> {
                 _verificationStepTile(
                   proceed: profileProv.userProfileModel?.emailVerified == false,
                   title: 'Verify Email',
-                  subtitle: 'Convert up to \$300',
+                  subtitle: 'Convert up to \$500',
                   verified:
                       profileProv.userProfileModel?.emailVerified ?? false,
                 ),
@@ -62,7 +62,7 @@ class _VerificationStatusState extends State<VerificationStatus> {
                       profileProv.userProfileModel?.emailVerified == true &&
                           profileProv.userProfileModel?.kyc == null,
                   title: 'Verify BVN',
-                  subtitle: 'Increase your limit to \$600',
+                  subtitle: 'Increase your limit to \$1400',
                   verified: profileProv.userProfileModel?.kyc == KycType.bvn,
                   onTap: () =>
                       PageNavigation.pushPage(context, const EnterBvnDetails()),

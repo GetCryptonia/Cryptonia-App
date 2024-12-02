@@ -1,6 +1,14 @@
+import 'package:cryptonia/src/core/local/page_navigation.dart';
+import 'package:cryptonia/src/features/auth/screens/sign_in.dart';
+import 'package:cryptonia/src/features/bank/providers/bank_provider.dart';
+import 'package:cryptonia/src/features/history/providers/history_provider.dart';
+import 'package:cryptonia/src/features/kyc/provider/kyc_provider.dart';
+import 'package:cryptonia/src/features/notification/provider/notification_provider.dart';
+import 'package:cryptonia/src/features/transaction/providers/transaction_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DeletedAccountSuccessfully extends StatefulWidget {
   const DeletedAccountSuccessfully({super.key});
@@ -16,7 +24,7 @@ class _DeletedAccountSuccessfullyState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.kTextField,
         title: const Text('Email Changed'),
       ),
@@ -39,8 +47,18 @@ class _DeletedAccountSuccessfullyState
             ),
             const Spacer(),
             CustomButton(
-              text: 'Close App',
-              onPressed: () {},
+              text: 'Done',
+              onPressed: () {
+                //clear all and replace page with the login screen and pop all stack
+
+                context.read<TransactionProvider>().clearAll();
+                context.read<HistoryProvider>().clearAll();
+                context.read<NotificationProvider>().clearAll();
+                context.read<KycProvider>().clearAll();
+                context.read<BankProvider>().clearAll();
+
+                PageNavigation.replaceAll(context, const SignIn());
+              },
             ),
           ],
         ),
