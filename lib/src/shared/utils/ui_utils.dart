@@ -3,6 +3,7 @@ import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UiUtils {
   static Widget loadingIndicator(BuildContext context,
@@ -58,5 +59,22 @@ class UiUtils {
         ),
       ),
     );
+  }
+
+  static sendEmail(
+    BuildContext context, {
+    required String recipient,
+    required String subject,
+    required String body,
+  }) async {
+    try {
+      //use url launcher
+      final mailtoUrl = 'mailto:$recipient?subject=$subject&body=$body';
+
+      await launchUrl(Uri.parse(mailtoUrl),
+          mode: LaunchMode.externalApplication);
+    } catch (e) {
+      showSnackBar(context, 'Could not send email');
+    }
   }
 }

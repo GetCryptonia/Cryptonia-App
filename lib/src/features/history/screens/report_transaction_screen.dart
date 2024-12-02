@@ -9,7 +9,6 @@ import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:cryptonia/src/shared/widgets/custom_text_field.dart';
 import 'package:cryptonia/src/shared/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:provider/provider.dart';
 
 class ReportTransactionScreen extends StatefulWidget {
@@ -103,13 +102,10 @@ class _ReportTransactionScreenState extends State<ReportTransactionScreen> {
                             return;
                           }
 
-                          final Email email = Email(
+                          await UiUtils.sendEmail(
+                            context,
+                            recipient: 'support@getcryptonia.com',
                             subject: 'Reporting Transaction',
-                            recipients: ['support@getcryptonia.com'],
-                            cc: ['support@getcryptonia.com'],
-                            bcc: ['support@getcryptonia.com'],
-                            //attachmentPaths: ['/path/to/attachment.zip'],
-                            isHTML: false,
                             body:
                                 'Hello, I would like to report a transaction.\n'
                                 'Here are the details:\n\n'
@@ -119,8 +115,6 @@ class _ReportTransactionScreenState extends State<ReportTransactionScreen> {
                                 'Transaction hash: ${_hash.text}. \n\n'
                                 'Some further description: ${_description.text}',
                           );
-
-                          await FlutterEmailSender.send(email);
                         },
                       ),
                     ],

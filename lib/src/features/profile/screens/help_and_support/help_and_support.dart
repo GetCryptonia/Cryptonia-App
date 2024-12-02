@@ -1,8 +1,8 @@
 import 'package:cryptonia/src/features/profile/widgets/about_us_action_tile.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/app_constants.dart';
+import 'package:cryptonia/src/shared/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,17 +57,10 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                 AboutUsActionTile(
                   title: 'Send an email',
                   onTap: () async {
-                    final Email email = Email(
-                      body: '',
-                      subject: 'Help and Support',
-                      recipients: ['support@getcryptonia.com'],
-                      cc: ['support@getcryptonia.com'],
-                      bcc: ['support@getcryptonia.com'],
-                      //attachmentPaths: ['/path/to/attachment.zip'],
-                      isHTML: false,
-                    );
-
-                    await FlutterEmailSender.send(email);
+                    await UiUtils.sendEmail(context,
+                        recipient: 'support@getcryptonia.com',
+                        subject: 'Help and Support',
+                        body: '');
                   },
                 ),
               ],
