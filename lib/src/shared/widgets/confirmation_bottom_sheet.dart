@@ -39,7 +39,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               message,
               textAlign: TextAlign.left,

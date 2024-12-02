@@ -102,6 +102,14 @@ class HistoryProvider with ChangeNotifier {
 
     if (res.status == Status.success) {
       order = res.data as OrderModel;
+      List<OrderModel> orderList = orders.map((e) {
+        if (e.id == orderId) {
+          e.status = TransactionStatus.cancelled;
+        }
+        return e;
+      }).toList();
+
+      orders = orderList;
     }
 
     return res;

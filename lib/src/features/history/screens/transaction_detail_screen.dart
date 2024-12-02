@@ -9,6 +9,8 @@ import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/date_time_utils.dart';
 import 'package:cryptonia/src/shared/utils/num_extension.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
+import 'package:cryptonia/src/shared/widgets/confirmation_bottom_sheet.dart';
+import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:cryptonia/src/shared/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -180,7 +182,33 @@ class _TransactionDetailScreenState extends State<TransactionDetailScreen> {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 16),
+                    if (order.status == TransactionStatus.processing)
+                      CustomButton(
+                        text: 'Cancel Transaction',
+                        onPressed: () async {
+                          bool? proceed = await showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return ConfirmationBottomSheet(
+                                  message: 'Cancel this order?',
+                                  onTap: () => Navigator.pop(context, true));
+                            },
+                          );
+
+                          if (proceed != true) return;
+
+                          UiUtils.showLoadingIndicatorDialog(context);
+
+                          final res = await historyProv.cancelOrder(order.id);
+
+                          PageNavigation.popPage(context);
+
+                          UiUtils.displayResponse(context, res);
+                        },
+                      ),
+                    const SizedBox(height: 8),
                   ],
                 ),
         );
