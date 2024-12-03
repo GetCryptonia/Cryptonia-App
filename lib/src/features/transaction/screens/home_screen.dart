@@ -97,11 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 return const VerificationStatus();
                                               });
                                         },
-                                        kycLevel: profileProv.profile?.kyc
-                                                ?.verification(profileProv
-                                                        .profile
-                                                        ?.emailVerified ??
-                                                    false) ??
+                                        kycLevel: profileProv
+                                                .profile?.kyc?.verification ??
                                             1,
                                         kycStatus: 'Your account is limited. '
                                             'Complete KYC for unlimited conversion.',

@@ -10,8 +10,7 @@ extension KycTypeExtension on KycType {
     }
   }
 
-  int verification(bool emailVerified) {
-    if (emailVerified) return 1;
+  int get verification {
     switch (this) {
       case KycType.bvn:
         return 2;

@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               borderRadius: BorderRadius.circular(128),
                             ),
                             child: Text(
-                                '${profileProv.profile?.kyc?.verification(profileProv.profile?.emailVerified ?? false) ?? 1}/${KycType.values.length} Completed'),
+                                '${profileProv.profile?.kyc?.verification ?? 1}/${KycType.values.length} Completed'),
                           ),
                         ),
                       ),

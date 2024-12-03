@@ -25,7 +25,7 @@ class UserProfileModel {
     List<KycType> matchingKyc = json['kyc'] == null
         ? []
         : KycType.values
-            .where((e) => e.name.toLowerCase() == json['kyc'])
+            .where((e) => e.name.toUpperCase() == json['kyc'])
             .toList();
     return UserProfileModel(
       username: json['username'],
