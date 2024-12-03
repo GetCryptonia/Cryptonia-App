@@ -71,4 +71,16 @@ class NotificationProvider with ChangeNotifier {
 
     return res;
   }
+
+  Future<ApiResponse> editToken(String fcmToken) async {
+    String? token = AuthProvider().token;
+
+    if (token == null) return ApiResponse.exception('Cannot process request');
+
+    final res = await _service.editToken(token, fcmToken);
+
+    notifyListeners();
+
+    return res;
+  }
 }

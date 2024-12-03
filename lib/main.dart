@@ -1,3 +1,4 @@
+import 'package:cryptonia/firebase_options.dart';
 import 'package:cryptonia/src/features/auth/providers/auth_provider.dart';
 import 'package:cryptonia/src/features/bank/providers/bank_provider.dart';
 import 'package:cryptonia/src/features/history/providers/history_provider.dart';
@@ -7,10 +8,17 @@ import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
 import 'package:cryptonia/src/features/transaction/providers/transaction_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/splash.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [

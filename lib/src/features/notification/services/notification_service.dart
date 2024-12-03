@@ -47,4 +47,24 @@ class NotificationService {
       }
     }
   }
+
+  //send notification token
+  Future<ApiResponse> editToken(String token, String fcmToken) async {
+    try {
+      final String endpoint = fcmToken;
+
+      final Dio dio = Dio();
+      dio.options.headers.addAll({"Authorization": "Bearer $token"});
+
+      final response = await dio.put('$_path$endpoint');
+
+      return ApiResponse.success(message: response.data['message']);
+    } catch (e) {
+      if (e is DioException) {
+        return ApiResponse.dioException(e);
+      } else {
+        return ApiResponse.exception(e.toString());
+      }
+    }
+  }
 }

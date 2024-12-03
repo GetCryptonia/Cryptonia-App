@@ -41,7 +41,7 @@ class _BvnVerifiedState extends State<BvnVerified> {
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    'Increase your limit to \$1000 or 1,000,000 NGN',
+                    'Increased your limit to \$1400',
                     textAlign: TextAlign.center,
                   ),
                 ],

@@ -106,7 +106,7 @@ class _VerifyBvnOtpState extends State<VerifyBvnOtp> {
                       UiUtils.showLoadingIndicatorDialog(context);
 
                       final res = await kycProv.verifyOtp(
-                          otp: _otpController.text, type: KycType.nin);
+                          otp: _otpController.text, type: KycType.bvn);
 
                       PageNavigation.popPage(context);
 
