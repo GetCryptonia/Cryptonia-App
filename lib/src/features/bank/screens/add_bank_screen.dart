@@ -122,24 +122,25 @@ class _AddBankScreenState extends State<AddBankScreen> {
                     ],
                   ),
                 ),
-                CustomButton(
-                  text: 'Add Bank Account',
-                  onPressed: () async {
-                    UiUtils.showLoadingIndicatorDialog(context);
+                if (bankProv.banks.length < 10)
+                  CustomButton(
+                    text: 'Add Bank Account',
+                    onPressed: () async {
+                      UiUtils.showLoadingIndicatorDialog(context);
 
-                    final res = await bankProv.createUserAccount();
+                      final res = await bankProv.createUserAccount();
 
-                    PageNavigation.popPage(context);
-
-                    UiUtils.displayResponse(context, res);
-
-                    if (res.status != Status.success) return;
-
-                    await Future.delayed(const Duration(seconds: 2), () {
                       PageNavigation.popPage(context);
-                    });
-                  },
-                )
+
+                      UiUtils.displayResponse(context, res);
+
+                      if (res.status != Status.success) return;
+
+                      await Future.delayed(const Duration(seconds: 2), () {
+                        PageNavigation.popPage(context);
+                      });
+                    },
+                  )
               ],
             ),
           ),
