@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cryptonia/src/core/local/page_navigation.dart';
 import 'package:cryptonia/src/core/network/api_response.dart';
 import 'package:cryptonia/src/features/auth/screens/sign_in.dart';
@@ -21,6 +23,7 @@ import 'package:cryptonia/src/shared/widgets/api_response_future_builder.dart';
 import 'package:cryptonia/src/shared/widgets/confirmation_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -128,7 +131,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'Legal',
                       ),
                       ProfileActionTile(
-                        onTap: () {},
+                        onTap: () async {
+                          String? url;
+
+                          if (Platform.isAndroid) {
+                            url =
+                                'https://play.google.com/store/apps/details?id=com.evolutionConsult.cryptonia';
+                          } else if (Platform.isIOS) {
+                            url = null;
+                          }
+
+                          if (url == null) return;
+
+                          await launchUrl(Uri.parse(url));
+                        },
                         icon: 'assets/svgs/profile/rate.svg',
                         title: 'Rate Us',
                         trailingIcon: 'assets/svgs/profile/link.svg',
