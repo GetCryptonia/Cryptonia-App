@@ -29,6 +29,7 @@ class _BankListScreenState extends State<BankListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -38,60 +39,62 @@ class _BankListScreenState extends State<BankListScreen> {
         future: _fetchAccounts,
         child: Consumer<BankProvider>(
           builder: (context, bankProv, _) {
-            return bankProv.accounts.isEmpty
-                ? const Center(
-                    child: EmptyWidget(
-                        title: 'Nothing here.',
-                        body: "You haven't added a bank account yet"),
-                  )
-                : ListView(
-                    padding: AppConstants.kScaffoldPadding,
+            return ListView(
+              padding: AppConstants.kScaffoldPadding,
+              children: [
+                if (bankProv.accounts.isEmpty)
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: size.height * 0.2),
+                      child: const EmptyWidget(
+                          title: 'Nothing here.',
+                          body: "You haven't added a bank account yet"),
+                    ),
+                  ),
+                ...bankProv.accounts.map(
+                  (account) {
+                    return BankCard(
+                      account: account,
+                      onTap: () {},
+                      onDelete: () async {
+                        final ApiResponse? res = await showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return ConfirmationBottomSheet(
+                              message:
+                                  'Are you sure you want delete this account?',
+                              onTap: () async {
+                                ApiResponse response = await bankProv
+                                    .removeUserAccount(account.id);
+
+                                PageNavigation.pop(context, response);
+                              },
+                            );
+                          },
+                        );
+
+                        if (res == null) return;
+
+                        UiUtils.displayResponse(context, res);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () =>
+                      PageNavigation.pushPage(context, const AddBankScreen()),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      ...bankProv.accounts.map(
-                        (account) {
-                          return BankCard(
-                            account: account,
-                            onTap: () {},
-                            onDelete: () async {
-                              final ApiResponse? res =
-                                  await showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return ConfirmationBottomSheet(
-                                    message:
-                                        'Are you sure you want delete this account?',
-                                    onTap: () async {
-                                      ApiResponse response = await bankProv
-                                          .removeUserAccount(account.id);
-
-                                      PageNavigation.pop(context, response);
-                                    },
-                                  );
-                                },
-                              );
-
-                              if (res == null) return;
-
-                              UiUtils.displayResponse(context, res);
-                            },
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () => PageNavigation.pushPage(
-                            context, const AddBankScreen()),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.add_circle_outline_rounded, size: 20),
-                            SizedBox(width: 10),
-                            Text('Add new account'),
-                          ],
-                        ),
-                      ),
+                      Icon(Icons.add_circle_outline_rounded, size: 20),
+                      SizedBox(width: 10),
+                      Text('Add new account'),
                     ],
-                  );
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),

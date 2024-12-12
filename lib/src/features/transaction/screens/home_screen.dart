@@ -49,8 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 left: 16, right: 16, top: 16, bottom: 32),
                             color: AppColors.kContainerBg,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: AssetImage(
+                                      profileProv.profile?.avatar ??
+                                          'assets/images/avatars/1.png'),
+                                ),
+                                const SizedBox(width: 10),
                                 RichText(
                                   text: TextSpan(
                                       text:
@@ -69,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ]),
                                 ),
+                                const Spacer(),
                                 InkWell(
                                   onTap: () => PageNavigation.pushPage(
                                       context, const NotificationList()),

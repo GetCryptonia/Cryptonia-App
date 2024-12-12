@@ -122,7 +122,7 @@ class _AddBankScreenState extends State<AddBankScreen> {
                     ],
                   ),
                 ),
-                if (bankProv.banks.length < 10)
+                if (bankProv.accounts.length < 10)
                   CustomButton(
                     text: 'Add Bank Account',
                     onPressed: () async {

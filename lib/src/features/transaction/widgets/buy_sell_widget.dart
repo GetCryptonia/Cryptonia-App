@@ -4,6 +4,7 @@ import 'package:cryptonia/src/features/transaction/utils/enums/currency_types.da
 import 'package:cryptonia/src/features/transaction/utils/enums/tokens_enum.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
 import 'package:cryptonia/src/shared/utils/double_utils.dart';
+import 'package:cryptonia/src/shared/utils/ui_utils.dart';
 import 'package:cryptonia/src/shared/widgets/blank_text_field.dart';
 import 'package:cryptonia/src/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -240,7 +241,15 @@ class _BuySellWidgetState extends State<BuySellWidget> {
               const SizedBox(height: 16),
               CustomButton(
                 text: 'Exchange',
-                onPressed: widget.exchange,
+                onPressed: () {
+                  if (_amount.text.isEmpty) {
+                    UiUtils.showErrorDialog(context,
+                        description: 'Enter a token amount');
+                    return;
+                  }
+
+                  widget.exchange();
+                },
               ),
             ],
           ),
