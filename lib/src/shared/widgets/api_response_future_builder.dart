@@ -16,17 +16,14 @@ class ApiResponseFutureBuilder extends StatefulWidget {
 class _ApiResponseFutureBuilderState extends State<ApiResponseFutureBuilder> {
   @override
   Widget build(BuildContext context) {
-    print('Built the widget');
     return FutureBuilder<ApiResponse>(
       future: widget.future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: UiUtils.loadingIndicator(context));
         } else if (snapshot.hasError) {
-          print('Snapshot has error');
           return Center(child: Text(snapshot.error.toString()));
         } else if (snapshot.hasData && snapshot.data!.status == Status.error) {
-          print('Snapshot status is an error');
           return Center(
             child: Text(snapshot.data!.errorMessage ?? snapshot.data!.message),
           );
@@ -35,24 +32,5 @@ class _ApiResponseFutureBuilderState extends State<ApiResponseFutureBuilder> {
         }
       },
     );
-    // return Scaffold(
-    //   body: Center(
-    //     child: FutureBuilder<ApiResponse>(
-    //       future: future,
-    //       builder: (context, snapshot) {
-    //         if (snapshot.connectionState == ConnectionState.waiting) {
-    //           return Center(child: UiUtils.loadingIndicator(context));
-    //         } else if (snapshot.hasError) {
-    //           return Center(child: Text(snapshot.error.toString()));
-    //         } else if (snapshot.hasData &&
-    //             snapshot.data!.status == Status.error) {
-    //           return Center(child: Text(snapshot.data!.message));
-    //         } else {
-    //           return child;
-    //         }
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 }

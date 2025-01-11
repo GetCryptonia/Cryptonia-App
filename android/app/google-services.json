@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:357826746533:android:860a2e8fa419068aefd54c",
+        "android_client_info": {
+          "package_name": "com.evolutionConsult.cryptonia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh4ePKqkr9p82vexkY3LMOQ2pFlwNR_cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:357826746533:android:d70348f691dd9769efd54c",
         "android_client_info": {
           "package_name": "com.getcryptonia.cryptonia"

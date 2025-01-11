@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDh4ePKqkr9p82vexkY3LMOQ2pFlwNR_cY',
-    appId: '1:357826746533:android:d70348f691dd9769efd54c',
+    appId: '1:357826746533:android:860a2e8fa419068aefd54c',
     messagingSenderId: '357826746533',
     projectId: 'cryptonia-f5bc2',
     storageBucket: 'cryptonia-f5bc2.firebasestorage.app',
@@ -66,10 +66,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAn6Zfj8JFg7TehtheFP3VgMv5xrA2JBEM',
-    appId: '1:357826746533:ios:ab6a0933d34ea1aaefd54c',
+    appId: '1:357826746533:ios:519b57211193a77eefd54c',
     messagingSenderId: '357826746533',
     projectId: 'cryptonia-f5bc2',
     storageBucket: 'cryptonia-f5bc2.firebasestorage.app',
-    iosBundleId: 'com.getcryptonia.cryptonia',
+    iosBundleId: 'com.evolutionconsultancy.cryptonia',
   );
+
 }

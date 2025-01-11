@@ -151,7 +151,7 @@ class _SignInState extends State<SignIn> {
                                     context,
                                     title: 'Biometrics Error',
                                     description:
-                                        'No stored login details found',
+                                        'You need to first login with your email and password',
                                   );
                                   return;
                                 }

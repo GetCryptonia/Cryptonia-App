@@ -50,8 +50,7 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                 AboutUsActionTile(
                   title: 'FAQs',
                   onTap: () async {
-                    await launchUrl(
-                        Uri.parse('https://getcryptonia.com/homepage#faq'));
+                    await launchUrl(Uri.parse('https://getcryptonia.com/#faq'));
                   },
                 ),
                 const Divider(),
