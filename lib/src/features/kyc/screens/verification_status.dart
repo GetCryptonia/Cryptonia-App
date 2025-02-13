@@ -4,6 +4,7 @@ import 'package:cryptonia/src/features/kyc/screens/bvn/enter_bvn_details.dart';
 import 'package:cryptonia/src/features/kyc/utils/enums/kyc_type.dart';
 import 'package:cryptonia/src/features/profile/providers/profile_provider.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
+import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +63,8 @@ class _VerificationStatusState extends State<VerificationStatus> {
                       profileProv.userProfileModel?.emailVerified == true &&
                           profileProv.userProfileModel?.kyc == null,
                   title: 'Verify BVN',
-                  subtitle: 'Increase your limit to \$1400',
+                  subtitle:
+                      'Increase your limit to \$${AppConstants.kMaxTradeLimit}',
                   verified: profileProv.userProfileModel?.kyc == KycType.bvn,
                   onTap: () =>
                       PageNavigation.pushPage(context, const EnterBvnDetails()),

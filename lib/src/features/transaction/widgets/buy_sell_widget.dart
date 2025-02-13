@@ -3,6 +3,7 @@ import 'package:cryptonia/src/features/transaction/screens/select_currency_botto
 import 'package:cryptonia/src/features/transaction/utils/enums/currency_types.dart';
 import 'package:cryptonia/src/features/transaction/utils/enums/tokens_enum.dart';
 import 'package:cryptonia/src/shared/theming/app_theming.dart';
+import 'package:cryptonia/src/shared/utils/app_constants.dart';
 import 'package:cryptonia/src/shared/utils/double_utils.dart';
 import 'package:cryptonia/src/shared/utils/ui_utils.dart';
 import 'package:cryptonia/src/shared/widgets/blank_text_field.dart';
@@ -71,7 +72,7 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                       children: [
                         Expanded(
                           child: BlankTextField(
-                            hint: '\$50',
+                            hint: '\$0.00',
                             controller: _amount,
                             keyboardType: TextInputType.number,
                             formatters: [
@@ -157,7 +158,7 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                         const SizedBox(height: 8),
                         Text(
                           _amount.text.isEmpty || transactionProv.rate == null
-                              ? '--:--'
+                              ? '\$0.00'
                               : (transactionProv.rate!.fiatAmount *
                                       double.parse(_amount.text.trim()))
                                   .toReadable,
@@ -242,9 +243,16 @@ class _BuySellWidgetState extends State<BuySellWidget> {
               CustomButton(
                 text: 'Exchange',
                 onPressed: () {
-                  if (_amount.text.isEmpty) {
+                  if (_amount.text.isEmpty || transactionProv.amount == null) {
                     UiUtils.showErrorDialog(context,
                         description: 'Enter a token amount');
+                    return;
+                  }
+
+                  if (transactionProv.amount! > AppConstants.kMaxTradeLimit) {
+                    UiUtils.showErrorDialog(context,
+                        description:
+                            'Trade limit exceeded. You can only trade up to \$${AppConstants.kMaxTradeLimit}');
                     return;
                   }
 

@@ -1,3 +1,14 @@
+List<TokenType> enabledTokens = [
+  TokenType.usdCErc,
+  TokenType.usdTErc,
+  // TokenType.usdCSol,
+  // TokenType.usdTSol,
+  TokenType.usdCBnb,
+  TokenType.usdTBnb,
+  TokenType.usdCTrx,
+  TokenType.usdTTrx,
+];
+
 enum TokenType {
   usdTErc,
   usdCErc,
@@ -5,8 +16,8 @@ enum TokenType {
   usdCBnb,
   usdTTrx,
   usdCTrx,
-  // usdCSol,
-  // usdTSol,
+  usdCSol,
+  usdTSol,
 }
 
 extension TokenTypeExtension on TokenType {
@@ -16,10 +27,10 @@ extension TokenTypeExtension on TokenType {
         return 'USDC (ERC20)';
       case TokenType.usdTErc:
         return 'USDT (ERC20)';
-      // case TokenType.usdCSol:
-      //   return 'USDC (SOL)';
-      // case TokenType.usdTSol:
-      //   return 'USDT (SOL)';
+      case TokenType.usdCSol:
+        return 'USDC (SOL)';
+      case TokenType.usdTSol:
+        return 'USDT (SOL)';
       case TokenType.usdCBnb:
         return 'USDC (BNB)';
       case TokenType.usdTBnb:
@@ -37,10 +48,10 @@ extension TokenTypeExtension on TokenType {
         return 'Ethereum';
       case TokenType.usdTErc:
         return 'Ethereum';
-      // case TokenType.usdCSol:
-      //   return 'Solana';
-      // case TokenType.usdTSol:
-      //   return 'Solana';
+      case TokenType.usdCSol:
+        return 'Solana';
+      case TokenType.usdTSol:
+        return 'Solana';
       case TokenType.usdTBnb:
         return 'BNB Smart Chain';
       case TokenType.usdCBnb:
@@ -58,10 +69,10 @@ extension TokenTypeExtension on TokenType {
         return 'assets/images/tokens/usdc-erc.png';
       case TokenType.usdTErc:
         return 'assets/images/tokens/usdt-erc.png';
-      // case TokenType.usdCSol:
-      //   return 'assets/images/tokens/usdc-sol.png';
-      // case TokenType.usdTSol:
-      //   return 'assets/images/tokens/usdt-sol.png';
+      case TokenType.usdCSol:
+        return 'assets/images/tokens/usdc-sol.png';
+      case TokenType.usdTSol:
+        return 'assets/images/tokens/usdt-sol.png';
       case TokenType.usdCBnb:
         return 'assets/images/tokens/usdc-bnb.png';
       case TokenType.usdTBnb:
@@ -80,10 +91,10 @@ extension TokenTypeExtension on TokenType {
         return 'USDC(ERC20)';
       case TokenType.usdTErc:
         return 'USDT(ERC20)';
-      // case TokenType.usdCSol:
-      //   return 'USDC(SOL)';
-      // case TokenType.usdTSol:
-      //   return 'USDT(SOL)';
+      case TokenType.usdCSol:
+        return 'USDC(SOL)';
+      case TokenType.usdTSol:
+        return 'USDT(SOL)';
       case TokenType.usdTBnb:
         return 'USDT(BNB)';
       case TokenType.usdCBnb:

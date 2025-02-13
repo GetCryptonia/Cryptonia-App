@@ -27,6 +27,21 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  void fetchEmailDetails() {
+    if (context.read<AuthProvider>().loginDetails != null) {
+      AppConstants.setTextFieldValue(
+        controller: _emailController,
+        text: context.read<AuthProvider>().loginDetails!.email,
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchEmailDetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(

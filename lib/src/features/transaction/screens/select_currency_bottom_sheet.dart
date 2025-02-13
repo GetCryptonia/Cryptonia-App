@@ -21,8 +21,8 @@ class _SelectCurrencyBottomSheetState extends State<SelectCurrencyBottomSheet> {
   @override
   Widget build(BuildContext context) {
     List<TokenType> tokens = _searchController.text.isEmpty
-        ? TokenType.values
-        : TokenType.values
+        ? enabledTokens
+        : enabledTokens
             .where((e) =>
                 e.label
                     .toLowerCase()

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
+  static const num kMaxTradeLimit = 1650;
+
   static String get baseUrl => 'https://cryptonia-backend.onrender.com/api/v1/';
 
   static String get palmPayPic =>
